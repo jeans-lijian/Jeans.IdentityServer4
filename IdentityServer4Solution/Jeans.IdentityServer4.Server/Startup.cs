@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IdentityServer4;
 using Jeans.IdentityServer4.Server.Configuration;
+using Jeans.IdentityServer4.Server.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -26,6 +28,8 @@ namespace Jeans.IdentityServer4.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db")));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,6 +40,8 @@ namespace Jeans.IdentityServer4.Server
             services.AddIdentityServer()
                         .AddInMemoryClients(Config.GetClients())
                         .AddInMemoryApiResources(Config.GetApiResources());
+
+            services.AddSingleton<IDbContext, IdentityServerDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

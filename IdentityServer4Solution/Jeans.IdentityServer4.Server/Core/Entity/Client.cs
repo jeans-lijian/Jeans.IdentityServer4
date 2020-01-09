@@ -54,5 +54,13 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public string UserCodeType { get; set; }
         public int DeviceCodeLifetime { get; set; } = 300;
         public bool NonEditable { get; set; }
+
+        public List<ClientClaim> ClientClaims { get; set; }
+        public List<ClientCorsOrigin> ClientCorsOrigins { get; set; }
+        public List<ClientGrantType> ClientGrantTypes { get; set; }
+        public List<ClientProperty> ClientProperties { get; set; }
+        public List<ClientRedirectUri> ClientRedirectUris { get; set; }
+        public List<ClientScope> ClientScopes { get; set; }
+        public List<ClientSecret> ClientSecrets { get; set; }
     }
 }
