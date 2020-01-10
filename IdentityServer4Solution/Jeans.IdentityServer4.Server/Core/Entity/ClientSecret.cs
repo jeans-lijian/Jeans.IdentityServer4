@@ -8,9 +8,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// 客户秘钥
     /// </summary>
-    public class ClientSecret
+    public class ClientSecret: BaseEntity
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public string Value { get; set; }
         public DateTime? Expiration { get; set; }

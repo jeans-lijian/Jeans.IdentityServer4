@@ -8,9 +8,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// 客户声明
     /// </summary>
-    public class ClientClaim
+    public class ClientClaim : BaseEntity
     {
-        public int Id { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Jeans.IdentityServer4.Server.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Jeans.IdentityServer4.Server.Data
 {
     public interface IDbContext
     {
-        DbSet<TEntity> Set<TEntity>() where TEntity : class;
+        DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity;
 
         int SaveChanges();
 

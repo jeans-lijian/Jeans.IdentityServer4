@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
-    public class UserEntity
+    public class UserEntity : BaseEntity
     {
     }
 }

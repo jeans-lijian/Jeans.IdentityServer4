@@ -8,9 +8,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// Api资源
     /// </summary>
-    public class ApiResource
+    public class ApiResource : BaseEntity
     {
-        public int Id { get; set; }
         public bool Enabled { get; set; } = true;
         public string Name { get; set; }
         public string DisplayName { get; set; }

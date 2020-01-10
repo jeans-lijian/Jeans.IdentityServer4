@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
     /// <summary>
-    /// 客户授权类型
+    /// 客户Post登录重定向uri
     /// </summary>
-    public class ClientGrantType: BaseEntity
+    public class ClientPostLogoutRedirectUri: BaseEntity
     {
-        public string GrantType { get; set; }
+        public string PostLogoutRedirectUri { get; set; }
 
         public int ClientId { get; set; }
         public Client Client { get; set; }

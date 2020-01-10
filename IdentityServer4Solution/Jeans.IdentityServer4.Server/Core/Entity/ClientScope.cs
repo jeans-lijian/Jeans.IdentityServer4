@@ -8,9 +8,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// 客户作用域
     /// </summary>
-    public class ClientScope
+    public class ClientScope: BaseEntity
     {
-        public int Id { get; set; }
         public string Scope { get; set; }
 
         public int ClientId { get; set; }

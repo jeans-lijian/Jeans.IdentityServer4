@@ -9,9 +9,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// 客户
     /// </summary>
-    public class Client
+    public class Client : BaseEntity
     {
-        public int Id { get; set; }
         public bool Enabled { get; set; } = true;
         public string ClientId { get; set; }
         public string ProtocolType { get; set; } = "oidc";
@@ -62,5 +61,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public List<ClientRedirectUri> ClientRedirectUris { get; set; }
         public List<ClientScope> ClientScopes { get; set; }
         public List<ClientSecret> ClientSecrets { get; set; }
+        public List<ClientIdPRestriction> ClientIdPRestrictions { get; set; }
+        public List<ClientPostLogoutRedirectUri> ClientPostLogoutRedirectUris { get; set; }
     }
 }

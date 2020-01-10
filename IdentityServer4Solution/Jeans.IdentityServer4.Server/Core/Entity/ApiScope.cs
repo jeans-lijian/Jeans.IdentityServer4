@@ -8,9 +8,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     /// <summary>
     /// Api作用域
     /// </summary>
-    public class ApiScope
+    public class ApiScope : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
