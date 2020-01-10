@@ -36,6 +36,9 @@ namespace Jeans.IdentityServer4.Server.Data
             modelBuilder.ApplyConfiguration(new ClientRedirectUriMap());
             modelBuilder.ApplyConfiguration(new ClientScopeMap());
             modelBuilder.ApplyConfiguration(new ClientSecretMap());
+            modelBuilder.ApplyConfiguration(new IdentityResourceMap());
+            modelBuilder.ApplyConfiguration(new IdentityResourcePropertyMap());
+            modelBuilder.ApplyConfiguration(new IdentityClaimMap());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -58,6 +61,9 @@ namespace Jeans.IdentityServer4.Server.Data
         public DbSet<ClientIdPRestriction> ClientIdPRestrictions { get; set; }
         public DbSet<ClientPostLogoutRedirectUri> ClientPostLogoutRedirectUris { get; set; }
 
+        public DbSet<IdentityResource> IdentityResources { get; set; }
+        public DbSet<IdentityResourceProperty> IdentityResourceProperties { get; set; }
+        public DbSet<IdentityClaim> IdentityClaims { get; set; }
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {
