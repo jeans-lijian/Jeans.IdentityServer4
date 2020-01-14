@@ -14,6 +14,7 @@ using Jeans.IdentityServer4.Server.Configuration;
 using Jeans.IdentityServer4.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Jeans.IdentityServer4.Server.Extensions;
+using System.Reflection;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -29,7 +30,7 @@ namespace Jeans.IdentityServer4.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db")));
+            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("db")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
