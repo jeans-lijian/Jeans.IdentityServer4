@@ -39,6 +39,8 @@ namespace Jeans.IdentityServer4.Server.Data
             modelBuilder.ApplyConfiguration(new IdentityResourceMap());
             modelBuilder.ApplyConfiguration(new IdentityResourcePropertyMap());
             modelBuilder.ApplyConfiguration(new IdentityClaimMap());
+            modelBuilder.ApplyConfiguration(new PersistedGrantMap());
+            modelBuilder.ApplyConfiguration(new DeviceFlowCodeMap());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -64,6 +66,10 @@ namespace Jeans.IdentityServer4.Server.Data
         public DbSet<IdentityResource> IdentityResources { get; set; }
         public DbSet<IdentityResourceProperty> IdentityResourceProperties { get; set; }
         public DbSet<IdentityClaim> IdentityClaims { get; set; }
+
+        public DbSet<PersistedGrant> PersistedGrants { get; set; }
+        public DbSet<DeviceFlowCode> DeviceFlowCodes { get; set; }
+
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {

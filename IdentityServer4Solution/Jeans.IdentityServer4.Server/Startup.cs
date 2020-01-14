@@ -38,6 +38,8 @@ namespace Jeans.IdentityServer4.Server
             });
 
             services.AddIdentityServer()
+                        //.AddSigningCredential()
+                        //.AddDeveloperSigningCredential()
                         .AddInMemoryClients(Config.GetClients())
                         .AddInMemoryApiResources(Config.GetApiResources())
                         .AddConfigurationStore(options =>
