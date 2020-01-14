@@ -42,6 +42,7 @@ namespace Jeans.IdentityServer4.Server
                         .AddInMemoryApiResources(Config.GetApiResources());
 
             services.AddSingleton<IDbContext, IdentityServerDbContext>();
+            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
