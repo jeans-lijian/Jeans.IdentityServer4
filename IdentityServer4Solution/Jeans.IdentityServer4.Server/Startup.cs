@@ -13,6 +13,7 @@ using IdentityServer4;
 using Jeans.IdentityServer4.Server.Configuration;
 using Jeans.IdentityServer4.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using Jeans.IdentityServer4.Server.Extensions;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -37,22 +38,21 @@ namespace Jeans.IdentityServer4.Server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddIdentityServer()
-                        //.AddSigningCredential()
-                        //.AddDeveloperSigningCredential()
-                        .AddInMemoryClients(Config.GetClients())
-                        .AddInMemoryApiResources(Config.GetApiResources())
-                        .AddConfigurationStore(options =>
-                        {
-                            options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
-                        })
-                        .AddOperationalStore(options =>
-                        {
-                            options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
-                        });
+            services.AddIdentityServer();
+            //.AddSigningCredential()
+            //.AddDeveloperSigningCredential()
+            //.AddInMemoryClients(Config.GetClients())
+            //.AddInMemoryApiResources(Config.GetApiResources())
+            //.AddConfigurationStore(options =>
+            //{
+            //    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
+            //})
+            //.AddOperationalStore(options =>
+            //{
+            //    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
+            //});
 
-            services.AddSingleton<IDbContext, IdentityServerDbContext>();
-            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddDefaultDi();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
