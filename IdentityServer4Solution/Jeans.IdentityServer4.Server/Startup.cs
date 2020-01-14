@@ -39,7 +39,15 @@ namespace Jeans.IdentityServer4.Server
 
             services.AddIdentityServer()
                         .AddInMemoryClients(Config.GetClients())
-                        .AddInMemoryApiResources(Config.GetApiResources());
+                        .AddInMemoryApiResources(Config.GetApiResources())
+                        .AddConfigurationStore(options =>
+                        {
+                            options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
+                        })
+                        .AddOperationalStore(options =>
+                        {
+                            options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
+                        });
 
             services.AddSingleton<IDbContext, IdentityServerDbContext>();
             services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
