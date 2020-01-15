@@ -12,8 +12,8 @@ namespace Jeans.IdentityServer4.Server.Extensions
     {
         public static IServiceCollection AddDefaultDi(this IServiceCollection services)
         {
-            services.AddSingleton<IDbContext, IdentityServerDbContext>();
-            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddTransient<IDbContext, IdentityServerDbContext>();
+            services.AddTransient(typeof(IRepository<>), typeof(EfRepository<>));
 
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IResourceService, ResourceService>();
