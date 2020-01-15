@@ -44,16 +44,14 @@ namespace Jeans.IdentityServer4.Server
             services.AddIdentityServer()
             //.AddSigningCredential()
             //.AddDeveloperSigningCredential()
-            //.AddInMemoryClients(Config.GetClients())
-            //.AddInMemoryApiResources(Config.GetApiResources())
-            .AddClientStore<JeansClientStore>()
-            .AddResourceStore<JeansResourceStore>()
-            .AddResourceOwnerValidator<JeansResourceOwnerValidator>();
+                    .AddClientStore<JeansClientStore>()
+                    .AddResourceStore<JeansResourceStore>()
+                    .AddResourceOwnerValidator<JeansResourceOwnerValidator>();
 
             services.AddDefaultDi();
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

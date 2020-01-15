@@ -20,7 +20,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             Core.Entity.Client entity = await _clientService.FindClientByIdAsync(clientId);
             if (entity == null)
             {
-                return default(Client);
+                return new Client();
             }
 
             Client client = new Client

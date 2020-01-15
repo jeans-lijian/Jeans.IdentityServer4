@@ -17,7 +17,6 @@ namespace Jeans.IdentityServer4.Server.Extensions
 
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IResourceService, ResourceService>();
-            services.AddTransient<IIdentityResourceService, IdentityResourceService>();
             services.AddTransient<IUserEntityService, UserEntityService>();
 
             return services;
