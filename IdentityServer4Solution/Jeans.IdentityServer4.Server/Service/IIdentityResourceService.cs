@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Service
 {
-    public interface IUserEntityService
+    public interface IIdentityResourceService
     {
-        Task ValidateAsync(string userName, string password);
     }
 }

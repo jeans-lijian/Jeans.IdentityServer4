@@ -1,4 +1,5 @@
 ﻿using Jeans.IdentityServer4.Server.Data;
+using Jeans.IdentityServer4.Server.Service;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace Jeans.IdentityServer4.Server.Extensions
         {
             services.AddSingleton<IDbContext, IdentityServerDbContext>();
             services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
+
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IResourceService, ResourceService>();
+            services.AddTransient<IIdentityResourceService, IdentityResourceService>();
+            services.AddTransient<IUserEntityService, UserEntityService>();
 
             return services;
         }

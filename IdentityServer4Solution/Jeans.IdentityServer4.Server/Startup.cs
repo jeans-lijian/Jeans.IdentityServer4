@@ -15,6 +15,8 @@ using Jeans.IdentityServer4.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Jeans.IdentityServer4.Server.Extensions;
 using System.Reflection;
+using Jeans.IdentityServer4.Server.StoreImp;
+using AutoMapper;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -39,28 +41,26 @@ namespace Jeans.IdentityServer4.Server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddIdentityServer();
+            services.AddIdentityServer()
             //.AddSigningCredential()
             //.AddDeveloperSigningCredential()
             //.AddInMemoryClients(Config.GetClients())
             //.AddInMemoryApiResources(Config.GetApiResources())
-            //.AddConfigurationStore(options =>
-            //{
-            //    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
-            //})
-            //.AddOperationalStore(options =>
-            //{
-            //    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("IdentityServer_Db"));
-            //});
+            .AddClientStore<JeansClientStore>()
+            .AddResourceStore<JeansResourceStore>()
+            .AddResourceOwnerValidator<JeansResourceOwnerValidator>();
 
             services.AddDefaultDi();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAutoMapper(typeof(Startup));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            InitializeDatabase(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,5 +85,33 @@ namespace Jeans.IdentityServer4.Server
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<IdentityServerDbContext>();
+                context.Database.Migrate();
+
+                if (!context.Clients.Any())
+                {
+                    foreach (var item in Config.GetClients())
+                    {
+                        context.Clients.Add(item);
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var item in Config.GetApiResources())
+                    {
+                        context.ApiResources.Add(item);
+                    }
+                    context.SaveChanges();
+                }
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Jeans.IdentityServer4.Server.Core.Entity;
+﻿using Jeans.IdentityServer4.Server.Configuration;
+using Jeans.IdentityServer4.Server.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
