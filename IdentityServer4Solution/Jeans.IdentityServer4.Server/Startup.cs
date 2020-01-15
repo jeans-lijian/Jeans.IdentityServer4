@@ -46,7 +46,8 @@ namespace Jeans.IdentityServer4.Server
             //.AddDeveloperSigningCredential()
                     .AddClientStore<JeansClientStore>()
                     .AddResourceStore<JeansResourceStore>()
-                    .AddResourceOwnerValidator<JeansResourceOwnerValidator>();
+                    .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
+                    .AddProfileService<JeansProfileService>();
 
             services.AddDefaultDi();
 
@@ -105,6 +106,24 @@ namespace Jeans.IdentityServer4.Server
                     foreach (var item in Config.GetApiResources())
                     {
                         context.ApiResources.Add(item);
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.UserEntities.Any())
+                {
+                    foreach (var item in Config.GetUsers())
+                    {
+                        context.UserEntities.Add(item);
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var item in Config.GetIdentityResources())
+                    {
+                        context.IdentityResources.Add(item);
                     }
                     context.SaveChanges();
                 }

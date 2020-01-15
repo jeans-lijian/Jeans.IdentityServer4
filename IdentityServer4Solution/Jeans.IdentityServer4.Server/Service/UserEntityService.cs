@@ -1,8 +1,6 @@
 ﻿using Jeans.IdentityServer4.Server.Core.Entity;
 using Jeans.IdentityServer4.Server.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Service
@@ -15,9 +13,16 @@ namespace Jeans.IdentityServer4.Server.Service
             _userRepository = userRepository;
         }
 
-        public Task ValidateAsync(string userName, string password)
+
+        public async Task<UserEntity> ValidateAsync(string userName, string password)
         {
-            throw new NotImplementedException();
+            return await _userRepository.TableNoTracking.Include(x => x.UserEntityClaims).SingleOrDefaultAsync(w => w.UserName == userName && w.Password == password);
         }
+
+        public async Task<UserEntity> GetUserEntityByNameAsync(string userName)
+        {
+            return await _userRepository.TableNoTracking.Include(x => x.UserEntityClaims).SingleOrDefaultAsync(w => w.UserName == userName);
+        }
+
     }
 }

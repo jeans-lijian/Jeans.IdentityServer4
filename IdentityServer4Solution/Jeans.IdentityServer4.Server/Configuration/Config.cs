@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiResource = Jeans.IdentityServer4.Server.Core.Entity.ApiResource;
 using Client = Jeans.IdentityServer4.Server.Core.Entity.Client;
+using IdentityResource = Jeans.IdentityServer4.Server.Core.Entity.IdentityResource;
 
 namespace Jeans.IdentityServer4.Server.Configuration
 {
@@ -47,6 +48,82 @@ namespace Jeans.IdentityServer4.Server.Configuration
             };
 
             return apiList;
+        }
+
+        public static List<UserEntity> GetUsers()
+        {
+            var userList = new List<UserEntity>
+            {
+                new UserEntity
+                {
+                   UserName="Jeans",
+                   Password="123456",
+                   Email="lijiansoftware@163.com",
+                   UserEntityClaims=new List<UserEntityClaim>
+                   {
+                       new UserEntityClaim
+                       {
+                           Type="Role",
+                           Value="Jenas_Admin",
+                           Description="超级管理员"
+                       },
+                        new UserEntityClaim
+                        {
+                            Type="Role",
+                            Value="Other",
+                            Description="其它"
+                        }
+                   }
+                },
+                new UserEntity
+                {
+                   UserName="Admin",
+                   Password="123456",
+                   Email="185416672@qq.com",
+                   UserEntityClaims=new List<UserEntityClaim>
+                   {
+                       new UserEntityClaim
+                       {
+                           Type="Role",
+                           Value="Admin",
+                           Description="管理员"
+                       }
+                   }
+                }
+            };
+
+            return userList;
+        }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResource
+                {
+                    Name="openId",
+                    DisplayName="OpenId",
+                    Required=true
+                },
+                new IdentityResource
+                {
+                    Name="email",
+                    DisplayName="Email",
+                    Required=true
+                },
+                new IdentityResource
+                {
+                    Name="profile",
+                    DisplayName="Profile",
+                    Required=true
+                },
+                new IdentityResource
+                {
+                    Name="phone",
+                    DisplayName="Phone",
+                    Required=true
+                }
+            };
         }
 
     }
