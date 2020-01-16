@@ -29,6 +29,17 @@ namespace Jeans.IdentityServer4.Server.Configuration
                         {
                             GrantType=GrantType.ResourceOwnerPassword
                         }
+                    },
+                    ClientScopes=new List<ClientScope>
+                    {
+                        new ClientScope
+                        {
+                            Scope="user_api.read_only"
+                        },
+                        new ClientScope
+                        {
+                            Scope="manager_api"
+                        }
                     }
                 }
             };
@@ -42,8 +53,25 @@ namespace Jeans.IdentityServer4.Server.Configuration
             {
                 new ApiResource
                 {
-                    Name = "user",
-                    Description = "获取用户信息"
+                    Name = "user_api",
+                    Description = "获取用户信息",
+                    DisplayName="用户API",
+                    ApiScopes=new List<ApiScope>
+                    {
+                        new ApiScope
+                        {
+                            Name="user_api.full_sccess"
+                        },
+                        new ApiScope
+                        {
+                            Name="user_api.read_only"
+                        }
+                    }
+                },
+                new ApiResource
+                {
+                    Name="manager_api",
+                    DisplayName="管理员API"
                 }
             };
 
