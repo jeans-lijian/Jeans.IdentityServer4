@@ -16,12 +16,16 @@ namespace Jeans.IdentityServer4.Server.Service
 
         public async Task<UserEntity> ValidateAsync(string userName, string password)
         {
-            return await _userRepository.TableNoTracking.Include(x => x.UserEntityClaims).SingleOrDefaultAsync(w => w.UserName == userName && w.Password == password);
+            return await _userRepository.TableNoTracking
+                                                        .Include(x => x.UserEntityClaimRelations)
+                                                        .SingleOrDefaultAsync(w => w.UserName == userName && w.Password == password);
         }
 
         public async Task<UserEntity> GetUserEntityByNameAsync(string userName)
         {
-            return await _userRepository.TableNoTracking.Include(x => x.UserEntityClaims).SingleOrDefaultAsync(w => w.UserName == userName);
+            return await _userRepository.TableNoTracking
+                                                        .Include(x => x.UserEntityClaimRelations)
+                                                        .SingleOrDefaultAsync(w => w.UserName == userName);
         }
 
     }

@@ -24,7 +24,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 context.Result = new GrantValidationResult(
                     subject: entity.UserName,
                     authenticationMethod: OidcConstants.AuthenticationMethods.Password,
-                    claims: entity.UserEntityClaims.Select(s => new Claim(s.Type, s.Value)).ToList());
+                    claims: entity.UserEntityClaimRelations.Select(s => new Claim(s.UserEntityClaim.Type, s.UserEntityClaim.Value)).ToList());
             }
             else
             {

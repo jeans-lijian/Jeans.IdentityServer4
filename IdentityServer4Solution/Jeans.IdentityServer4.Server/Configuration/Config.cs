@@ -56,39 +56,15 @@ namespace Jeans.IdentityServer4.Server.Configuration
             {
                 new UserEntity
                 {
-                   UserName="Jeans",
+                   UserName="Jeans_Admin",
                    Password="123456",
-                   Email="lijiansoftware@163.com",
-                   UserEntityClaims=new List<UserEntityClaim>
-                   {
-                       new UserEntityClaim
-                       {
-                           Type="Role",
-                           Value="Jenas_Admin",
-                           Description="超级管理员"
-                       },
-                        new UserEntityClaim
-                        {
-                            Type="Role",
-                            Value="Other",
-                            Description="其它"
-                        }
-                   }
+                   Email="lijiansoftware@163.com"
                 },
                 new UserEntity
                 {
                    UserName="Admin",
                    Password="123456",
-                   Email="185416672@qq.com",
-                   UserEntityClaims=new List<UserEntityClaim>
-                   {
-                       new UserEntityClaim
-                       {
-                           Type="Role",
-                           Value="Admin",
-                           Description="管理员"
-                       }
-                   }
+                   Email="185416672@qq.com"
                 }
             };
 

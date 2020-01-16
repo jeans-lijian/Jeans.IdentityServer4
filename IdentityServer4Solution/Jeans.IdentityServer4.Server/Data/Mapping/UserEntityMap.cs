@@ -14,7 +14,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
             builder.Property(p => p.Password).HasMaxLength(64).IsRequired();
             builder.Property(p => p.Email).HasMaxLength(1000);
 
-            builder.HasMany(m => m.UserEntityClaims).WithOne(o => o.UserEntity).HasForeignKey(fk => fk.UserId);
+            builder.HasMany(m => m.UserEntityClaimRelations).WithOne(o => o.UserEntity).HasForeignKey(fk => fk.UserId);
         }
     }
 }

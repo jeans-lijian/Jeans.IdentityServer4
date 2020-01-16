@@ -43,12 +43,14 @@ namespace Jeans.IdentityServer4.Server.Data
             modelBuilder.ApplyConfiguration(new DeviceFlowCodeMap());
             modelBuilder.ApplyConfiguration(new UserEntityMap());
             modelBuilder.ApplyConfiguration(new UserEntityClaimMap());
+            modelBuilder.ApplyConfiguration(new UserEntityClaimRelationMap());
 
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<UserEntity> UserEntities { get; set; }
         public DbSet<UserEntityClaim> UserEntityClaims { get; set; }
+        public DbSet<UserEntityClaimRelation> UserEntityClaimRelations { get; set; }
 
         public DbSet<ApiResource> ApiResources { get; set; }
         public DbSet<ApiResourceClaim> ApiResourceClaims { get; set; }

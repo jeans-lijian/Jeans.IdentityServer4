@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jeans.IdentityServer4.Server", "Jeans.IdentityServer4.Server\Jeans.IdentityServer4.Server.csproj", "{FD03F851-80A8-46CB-9F7A-0E5F5ABADDFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jeans.IdentityServer4.UI", "Jeans.IdentityServer4.UI\Jeans.IdentityServer4.UI.csproj", "{A546F7C7-1422-468C-BBA7-55018672A79B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jeans.IdentityServer4.UI", "Jeans.IdentityServer4.UI\Jeans.IdentityServer4.UI.csproj", "{A546F7C7-1422-468C-BBA7-55018672A79B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

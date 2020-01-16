@@ -13,6 +13,8 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
             builder.Property(p => p.Type).HasMaxLength(200).IsRequired();
             builder.Property(p => p.Value).HasMaxLength(200).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(1000);
+
+            builder.HasMany(m => m.UserEntityClaimRelations).WithOne(o => o.UserEntityClaim).HasForeignKey(fk => fk.UserClaimId);
         }
     }
 }

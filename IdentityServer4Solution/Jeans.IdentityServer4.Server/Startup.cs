@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Jeans.IdentityServer4.Server.Configuration;
+using Jeans.IdentityServer4.Server.Data;
+using Jeans.IdentityServer4.Server.Extensions;
+using Jeans.IdentityServer4.Server.StoreImp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using IdentityServer4;
-using Jeans.IdentityServer4.Server.Configuration;
-using Jeans.IdentityServer4.Server.Data;
-using Microsoft.EntityFrameworkCore;
-using Jeans.IdentityServer4.Server.Extensions;
-using System.Reflection;
-using Jeans.IdentityServer4.Server.StoreImp;
-using AutoMapper;
+using System.Linq;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -29,7 +23,6 @@ namespace Jeans.IdentityServer4.Server
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("db")));
@@ -42,8 +35,6 @@ namespace Jeans.IdentityServer4.Server
             });
 
             services.AddIdentityServer()
-            //.AddSigningCredential()
-            //.AddDeveloperSigningCredential()
                     .AddClientStore<JeansClientStore>()
                     .AddResourceStore<JeansResourceStore>()
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
