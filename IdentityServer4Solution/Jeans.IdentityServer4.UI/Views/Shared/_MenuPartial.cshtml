@@ -2,14 +2,18 @@
     <li class="header">菜单(MENU)</li>
 
     @*@foreach (var item in (ViewData["Menu"] as List<MenuViewModel>).OrderBy(order => order.Sort))
-    {
-        @await Html.PartialAsync("_MenuItemPartial", item)
-    }*@
-    
-    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        {
+            @await Html.PartialAsync("_MenuItemPartial", item)
+        }*@
+
+    <li class="active">
+        <a href="#">
+            <i class="fa fa-desktop"></i> <span>控制面板</span>
+        </a>
+    </li>
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-link"></i> <span>Multilevel</span>
+            <i class="fa fa-address-card-o"></i> <span>身份资源</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -21,7 +25,7 @@
     </li>
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
+            <i class="fa fa-book"></i> <span>API资源</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -41,5 +45,10 @@
                 </ul>
             </li>
         </ul>
+    </li>
+    <li class="active">
+        <a href="@Url.Action("List","Client")">
+            <i class="fa fa-android"></i> <span>客户端</span>
+        </a>
     </li>
 </ul>

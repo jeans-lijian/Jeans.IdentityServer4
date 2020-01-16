@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "客户端列表";
+}
+
+<section class="content-header clearfix">
+    <h1 class="pull-left">@ViewBag.Title</h1>
+</section>
+<section class="content container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询条件</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="text" id="txtNameEmpNo" class="form-control" placeholder="姓名或工号" />
+                </div>
+                <div class="col-sm-8">
+                    <input type="button" class="btn btn-primary" id="btn_search" value="搜索" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询结果</h3>
+        </div>
+        <div class="panel-body">
+            <div class="btn-group margin-bottom">
+                <a class="btn btn-primary" asp-controller="User" asp-action="Add">新  增</a>
+                <button type="button" class="btn btn-default">删  除</button>
+            </div>
+
+            <table id="tb-user" class="table table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>处室</th>
+                        <th>工作岗位</th>
+                        <th>是否使用</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+    </script>
+}
