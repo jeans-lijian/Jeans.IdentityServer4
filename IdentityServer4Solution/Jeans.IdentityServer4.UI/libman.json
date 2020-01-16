@@ -3,16 +3,24 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "admin-lte@2.4.8",
-      "destination": "wwwroot/lib/admin-lte/"
-    },
-    {
       "library": "font-awesome@4.7.0",
       "destination": "wwwroot/lib/font-awesome/"
     },
     {
       "library": "datatables@1.10.19",
       "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "admin-lte@2.4.18",
+      "destination": "wwwroot/lib/admin-lte/",
+      "files": [
+        "js/adminlte.min.js",
+        "js/adminlte.js",
+        "css/AdminLTE.css",
+        "css/AdminLTE.min.css",
+        "css/skins/skin-blue.css",
+        "css/skins/skin-blue.min.css"
+      ]
     }
   ]
 }
