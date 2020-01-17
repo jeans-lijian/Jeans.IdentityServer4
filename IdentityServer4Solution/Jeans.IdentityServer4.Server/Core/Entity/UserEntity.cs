@@ -10,6 +10,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
 
         public string Email { get; set; }
 
-        public List<UserEntityClaimRelation> UserEntityClaimRelations { get; set; }
+        public List<UserEntityClaim> UserEntityClaims { get; set; }
+        public List<UserEntityRoleRelation> UserEntityRoleRelations { get; set; }
     }
 }

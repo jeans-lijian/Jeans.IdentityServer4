@@ -1,11 +1,11 @@
 ﻿namespace Jeans.IdentityServer4.Server.Core.Entity
 {
-    public class UserEntityClaimRelation : BaseEntity
+    public class UserEntityRoleRelation : BaseEntity
     {
         public int UserId { get; set; }
         public UserEntity UserEntity { get; set; }
 
-        public int UserClaimId { get; set; }
-        public UserEntityClaim UserEntityClaim { get; set; }
+        public int UserRoleId { get; set; }
+        public UserRole UserRole { get; set; }
     }
 }

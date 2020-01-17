@@ -27,8 +27,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             }
             else
             {
-                context.IssuedClaims = entity.UserEntityClaimRelations.Where(w => context.RequestedClaimTypes.Contains(w.UserEntityClaim.Type))
-                                                                                                     .Select(s => new Claim(s.UserEntityClaim.Type, s.UserEntityClaim.Value)).ToList();
+                context.IssuedClaims = entity.UserEntityClaims.Where(w => context.RequestedClaimTypes.Contains(w.Type))
+                                                                                                     .Select(s => new Claim(s.Type, s.Value)).ToList();
             }
         }
 

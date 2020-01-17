@@ -25,7 +25,8 @@ namespace Jeans.IdentityServer4.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("db")));
+            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identityserver")));
+            services.AddDbContext<ObjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identity")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -82,6 +83,8 @@ namespace Jeans.IdentityServer4.Server
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<IdentityServerDbContext>();
                 context.Database.Migrate();
+                var objectContext = serviceScope.ServiceProvider.GetRequiredService<ObjectDbContext>();
+                context.Database.Migrate();
 
                 if (!context.Clients.Any())
                 {
@@ -101,11 +104,11 @@ namespace Jeans.IdentityServer4.Server
                     context.SaveChanges();
                 }
 
-                if (!context.UserEntities.Any())
+                if (!objectContext.UserEntities.Any())
                 {
                     foreach (var item in Config.GetUsers())
                     {
-                        context.UserEntities.Add(item);
+                        objectContext.UserEntities.Add(item);
                     }
                     context.SaveChanges();
                 }

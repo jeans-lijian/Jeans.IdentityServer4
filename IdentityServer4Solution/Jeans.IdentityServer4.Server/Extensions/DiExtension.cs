@@ -13,7 +13,10 @@ namespace Jeans.IdentityServer4.Server.Extensions
         public static IServiceCollection AddDefaultDi(this IServiceCollection services)
         {
             services.AddScoped<IDbContext, IdentityServerDbContext>();
+            services.AddScoped<IDbContext, ObjectDbContext>();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+
 
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IResourceService, ResourceService>();
