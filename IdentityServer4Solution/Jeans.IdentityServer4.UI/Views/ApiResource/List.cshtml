@@ -27,7 +27,6 @@
         <div class="panel-body">
             <div class="btn-group margin-bottom">
                 <a class="btn btn-primary" asp-controller="ApiResource" asp-action="Add">新  增</a>
-                <button type="button" class="btn btn-default">删  除</button>
             </div>
 
             <table class="table table-bordered" style="width:100%;">
@@ -43,9 +42,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Description)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.AllowedAccessTokenSigningAlgorithms)
-                        </th>
+                        <th>签名算法</th>
                         <th>
                             @Html.DisplayNameFor(model => model.Enabled)
                         </th>

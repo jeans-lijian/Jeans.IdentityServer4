@@ -23,7 +23,7 @@ public string ClassActive(string controller_Name, string action_Name = "list")
         }*@
 
     <li @ClassActive("home", "index")>
-        <a href="@Url.Action("index","home")">
+        <a asp-controller="Home" asp-action="Index">
             <i class="fa fa-desktop"></i> <span>控制面板</span>
         </a>
     </li>
@@ -40,12 +40,12 @@ public string ClassActive(string controller_Name, string action_Name = "list")
         </ul>
     </li>
     <li @ClassActive("apiresource")>
-        <a href="@Url.Action("List","ApiResource")">
+        <a asp-controller="ApiResource" asp-action="List">
             <i class="fa fa-book"></i> <span>API资源</span>
         </a>
     </li>
     <li @ClassActive("client")>
-        <a href="@Url.Action("List","Client")">
+        <a asp-controller="Client" asp-action="List">
             <i class="fa fa-android"></i> <span>客户端</span>
         </a>
     </li>

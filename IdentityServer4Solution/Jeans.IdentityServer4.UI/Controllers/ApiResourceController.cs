@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Jeans.IdentityServer4.UI.Core.Entity;
+﻿using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
-using Jeans.IdentityServer4.UI.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.UI.Controllers
 {
@@ -32,13 +30,53 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(ApiResource entity)
         {
-            return View();
+            _apiResourceRepository.Insert(entity);
+
+            return RedirectToAction("List");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var entity = await _apiResourceRepository.TableNoTracking.FirstOrDefaultAsync(w => w.Id == id);
+
+            return View(entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ApiResource model)
+        {
+            var entity = _apiResourceRepository.GetById(model.Id);
+            if (entity != null)
+            {
+                entity.Name = model.Name;
+                entity.DisplayName = model.Name;
+                entity.Description = model.Name;
+                entity.Enabled = model.Enabled;
+                entity.NonEditable = model.NonEditable;
+                entity.Updated = DateTime.Now;
+                entity.LastAccessed = DateTime.Now;
+
+                _apiResourceRepository.Update(entity);
+
+                return RedirectToAction("List");
+            }
+
+            return View(model);
         }
 
         public IActionResult Delete(int id)
         {
+            var entity = _apiResourceRepository.GetById(id);
+            if (entity != null)
+            {
+                _apiResourceRepository.Delete(entity);
+            }
+
             return RedirectToAction("List");
         }
     }
