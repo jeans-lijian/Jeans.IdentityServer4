@@ -1,5 +1,5 @@
-﻿@using Jeans.IdentityServer4.UI.ViewModel
-@model IEnumerable<ApiResourceListVm>
+﻿@using Jeans.IdentityServer4.UI.Core.Entity
+@model IEnumerable<ApiResource>
 
 @{
     ViewData["Title"] = "API资源列表";
@@ -52,12 +52,8 @@
                         <th>
                             @Html.DisplayNameFor(model => model.NonEditable)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CreateTimeStr)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.UpdateTimeStr)
-                        </th>
+                        <th>创建时间</th>
+                        <th>修改时间</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,10 +96,10 @@
                                 @Html.DisplayFor(modelItem => item.NonEditable)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CreateTimeStr)
+                                @Html.DisplayFor(modelItem => item.Created.ToString("yyyy-MM-dd HH:mm:ss"))
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UpdateTimeStr)
+                                @Html.DisplayFor(modelItem => item.Updated.HasValue ? item.Updated.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")
                             </td>
                         </tr>
                     }

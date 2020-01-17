@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jeans.IdentityServer4.UI.Controllers
@@ -9,6 +10,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
     /// <summary>
     /// 客户端
     /// </summary>
+    [Authorize]
     public class ClientController : Controller
     {
         public IActionResult List()

@@ -1,4 +1,20 @@
-﻿<ul class="sidebar-menu" data-widget="tree">
+﻿@functions
+{
+public string ClassActive(string controller_Name, string action_Name = "list")
+{
+    var controllerName = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+    var actionName = ViewContext.RouteData.Values["Action"].ToString().ToLower();
+
+    if (controllerName == controller_Name.ToLower() && actionName == action_Name.ToLower())
+    {
+        return "class=active";
+    }
+
+    return "";
+}
+}
+
+<ul class="sidebar-menu" data-widget="tree">
     <li class="header">菜单(MENU)</li>
 
     @*@foreach (var item in (ViewData["Menu"] as List<MenuViewModel>).OrderBy(order => order.Sort))
@@ -6,8 +22,8 @@
             @await Html.PartialAsync("_MenuItemPartial", item)
         }*@
 
-    <li class="active">
-        <a href="#">
+    <li @ClassActive("home", "index")>
+        <a href="@Url.Action("index","home")">
             <i class="fa fa-desktop"></i> <span>控制面板</span>
         </a>
     </li>
@@ -23,12 +39,12 @@
             <li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
         </ul>
     </li>
-    <li>
+    <li @ClassActive("apiresource")>
         <a href="@Url.Action("List","ApiResource")">
             <i class="fa fa-book"></i> <span>API资源</span>
         </a>
     </li>
-    <li class="active">
+    <li @ClassActive("client")>
         <a href="@Url.Action("List","Client")">
             <i class="fa fa-android"></i> <span>客户端</span>
         </a>

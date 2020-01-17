@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Jeans.IdentityServer4.UI.Core.Entity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.UI.Controllers
@@ -11,7 +13,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;            
+            ViewBag.ReturnUrl = returnUrl;
 
             return View();
         }
@@ -19,24 +21,19 @@ namespace Jeans.IdentityServer4.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(string returnUrl,string emptoy="")
+        public async Task<IActionResult> Login(UserEntity entity, string returnUrl)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
+            if (entity.UserName != "admin" || entity.Password != "admin")
+            {
+                ModelState.AddModelError("", "用户名或者密码错误.");
 
-            //if (!model.HasLogin())
-            //{
-            //    ModelState.AddModelError("", Common.UserPwdError);
+                return View(entity);
+            }
 
-            //    return View(model);
-            //}           
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            claimsIdentity.AddClaim(new Claim(ClaimTypes.Name, entity.UserName));
 
-            //ClaimsIdentity claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            //claimsIdentity.AddClaim(new Claim(ClaimTypes.Name, model.UserName));
-
-            //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             return RedirectToLocal(returnUrl);
         }
