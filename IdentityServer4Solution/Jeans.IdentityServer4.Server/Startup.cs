@@ -83,8 +83,6 @@ namespace Jeans.IdentityServer4.Server
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<IdentityServerDbContext>();
                 context.Database.Migrate();
-                var objectContext = serviceScope.ServiceProvider.GetRequiredService<ObjectDbContext>();
-                context.Database.Migrate();
 
                 if (!context.Clients.Any())
                 {
@@ -104,15 +102,6 @@ namespace Jeans.IdentityServer4.Server
                     context.SaveChanges();
                 }
 
-                if (!objectContext.UserEntities.Any())
-                {
-                    foreach (var item in Config.GetUsers())
-                    {
-                        objectContext.UserEntities.Add(item);
-                    }
-                    context.SaveChanges();
-                }
-
                 if (!context.IdentityResources.Any())
                 {
                     foreach (var item in Config.GetIdentityResources())
@@ -120,6 +109,21 @@ namespace Jeans.IdentityServer4.Server
                         context.IdentityResources.Add(item);
                     }
                     context.SaveChanges();
+                }
+            }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var objectContext = serviceScope.ServiceProvider.GetRequiredService<ObjectDbContext>();
+                objectContext.Database.Migrate();
+                
+                if (!objectContext.UserEntities.Any())
+                {
+                    foreach (var item in Config.GetUsers())
+                    {
+                        objectContext.UserEntities.Add(item);
+                    }
+                    objectContext.SaveChanges();
                 }
             }
         }
