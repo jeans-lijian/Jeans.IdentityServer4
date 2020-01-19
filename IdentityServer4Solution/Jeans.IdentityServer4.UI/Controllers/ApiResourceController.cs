@@ -54,8 +54,8 @@ namespace Jeans.IdentityServer4.UI.Controllers
             if (entity != null)
             {
                 entity.Name = model.Name;
-                entity.DisplayName = model.Name;
-                entity.Description = model.Name;
+                entity.DisplayName = model.DisplayName;
+                entity.Description = model.Description;
                 entity.Enabled = model.Enabled;
                 entity.NonEditable = model.NonEditable;
                 entity.Updated = DateTime.Now;

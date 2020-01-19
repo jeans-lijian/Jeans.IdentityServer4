@@ -59,7 +59,7 @@
                         <tr>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group">
-                                    <a asp-controller="ApiResource" asp-action="List" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
+                                    <a asp-controller="ApiResource" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
                                     <a asp-controller="ApiResource" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">删 除</a>
 
                                     <div class="btn-group btn-group-xs" role="group">
@@ -93,10 +93,10 @@
                                 @Html.DisplayFor(modelItem => item.NonEditable)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Created.ToString("yyyy-MM-dd HH:mm:ss"))
+                                @item.Created.ToString("yyyy-MM-dd HH:mm:ss")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Updated.HasValue ? item.Updated.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")
+                                @(item.Updated.HasValue ? item.Updated.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")
                             </td>
                         </tr>
                     }
