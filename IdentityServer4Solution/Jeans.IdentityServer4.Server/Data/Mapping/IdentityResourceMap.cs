@@ -17,8 +17,8 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
             builder.Property(p => p.DisplayName).HasMaxLength(200);
             builder.Property(p => p.Description).HasMaxLength(1000);
 
-            builder.HasMany(m => m.IdentityResourceProperties).WithOne(o => o.IdentityResource).HasForeignKey(fk => fk.IdentityResourceId);
-            builder.HasMany(m => m.IdentityClaims).WithOne(o => o.IdentityResource).HasForeignKey(fk => fk.IdentityResourceId);
+            builder.HasMany(m => m.IdentityResourceProperties).WithOne(o => o.IdentityResource).HasForeignKey(fk => fk.IdentityResourceId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.IdentityClaims).WithOne(o => o.IdentityResource).HasForeignKey(fk => fk.IdentityResourceId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

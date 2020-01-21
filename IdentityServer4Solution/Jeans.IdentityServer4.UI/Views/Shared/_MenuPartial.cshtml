@@ -1,11 +1,14 @@
-﻿@functions
+﻿@{
+    var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope".ToLower() };
+}
+@functions
 {
-public string ClassActive(string controller_Name, string action_Name = "list")
+public string ClassActive(string[] controller_Name, string action_Name = "list")
 {
     var controllerName = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
     var actionName = ViewContext.RouteData.Values["Action"].ToString().ToLower();
 
-    if (controllerName == controller_Name.ToLower() && actionName == action_Name.ToLower())
+    if (controller_Name.Contains(controllerName))
     {
         return "class=active";
     }
@@ -22,7 +25,7 @@ public string ClassActive(string controller_Name, string action_Name = "list")
             @await Html.PartialAsync("_MenuItemPartial", item)
         }*@
 
-    <li @ClassActive("home", "index")>
+    <li @ClassActive(new[] { "home" }, "index")>
         <a asp-controller="Home" asp-action="Index">
             <i class="fa fa-desktop"></i> <span>控制面板</span>
         </a>
@@ -39,12 +42,12 @@ public string ClassActive(string controller_Name, string action_Name = "list")
             <li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
         </ul>
     </li>
-    <li @ClassActive("apiresource")>
+    <li @ClassActive(apiResourceMenu)>
         <a asp-controller="ApiResource" asp-action="List">
             <i class="fa fa-book"></i> <span>API资源</span>
         </a>
     </li>
-    <li @ClassActive("client")>
+    <li @ClassActive(new[] { "client" })>
         <a asp-controller="Client" asp-action="List">
             <i class="fa fa-android"></i> <span>客户端</span>
         </a>

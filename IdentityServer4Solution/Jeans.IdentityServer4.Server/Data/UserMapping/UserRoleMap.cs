@@ -13,7 +13,7 @@ namespace Jeans.IdentityServer4.Server.Data.UserMapping
             builder.Property(p => p.Name).HasMaxLength(64).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(1000);
 
-            builder.HasMany(m => m.UserEntityRoleRelations).WithOne(o => o.UserRole).HasForeignKey(fk => fk.UserRoleId);
+            builder.HasMany(m => m.UserEntityRoleRelations).WithOne(o => o.UserRole).HasForeignKey(fk => fk.UserRoleId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

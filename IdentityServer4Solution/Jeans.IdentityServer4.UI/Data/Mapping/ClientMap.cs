@@ -22,15 +22,15 @@ namespace Jeans.IdentityServer4.UI.Data.Mapping
             builder.Property(p => p.PairWiseSubjectSalt).HasMaxLength(200);
             builder.Property(p => p.UserCodeType).HasMaxLength(100);
 
-            builder.HasMany(m => m.ClientClaims).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientCorsOrigins).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientGrantTypes).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientProperties).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientRedirectUris).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientScopes).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientSecrets).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientIdPRestrictions).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
-            builder.HasMany(m => m.ClientPostLogoutRedirectUris).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId);
+            builder.HasMany(m => m.ClientClaims).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientCorsOrigins).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientGrantTypes).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientProperties).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientRedirectUris).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientScopes).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientSecrets).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientIdPRestrictions).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ClientPostLogoutRedirectUris).WithOne(o => o.Client).HasForeignKey(fk => fk.ClientId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

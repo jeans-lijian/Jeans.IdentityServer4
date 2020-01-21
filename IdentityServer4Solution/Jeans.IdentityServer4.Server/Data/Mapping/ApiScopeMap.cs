@@ -13,7 +13,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
             builder.Property(p => p.DisplayName).HasMaxLength(200);
             builder.Property(p => p.Description).HasMaxLength(1000);
 
-            builder.HasMany(m => m.ApiScopeClaims).WithOne(o => o.ApiScope).HasForeignKey(fk => fk.ApiScopeId);
+            builder.HasMany(m => m.ApiScopeClaims).WithOne(o => o.ApiScope).HasForeignKey(fk => fk.ApiScopeId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

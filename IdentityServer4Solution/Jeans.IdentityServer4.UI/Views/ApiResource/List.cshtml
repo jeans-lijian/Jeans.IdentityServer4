@@ -68,8 +68,8 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">link</a></li>
-                                            <li><a href="#">link</a></li>
+                                            <li><a asp-controller="ApiResourceClaim" asp-action="List" asp-route-apiResourceId="@item.Id">Api资源声明列表</a></li>
+                                            <li><a asp-controller="ApiScope" asp-action="List" asp-route-apiResourceId="@item.Id">Api资源作用域列表</a></li>
                                         </ul>
                                     </div>
                                 </div>
