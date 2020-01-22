@@ -28,5 +28,16 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return View(results);
         }
 
+        public IActionResult Delete(int id, int apiResourceId)
+        {
+            var entity = _apiScopeRepository.GetById(id);
+            if (entity != null)
+            {
+                _apiScopeRepository.Delete(entity);
+            }
+
+            return RedirectToAction("List", new { apiResourceId });
+        }
+
     }
 }
