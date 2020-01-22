@@ -25,12 +25,16 @@ namespace Jeans.IdentityServer4.UI.Controllers
             _apiResourceRepository = apiResourceRepository;
         }
 
+
         public async Task<IActionResult> List()
         {
-            var results = await _apiResourceClaimRepository.TableNoTracking.OrderBy(by => by.ApiResource.Name).ToListAsync();
+            var results = await _apiResourceClaimRepository.TableNoTracking
+                                            .Include(x=>x.ApiResource)
+                                            .OrderBy(by => by.ApiResource.Name).ToListAsync();
 
             return View(results);
         }
+
 
         public IActionResult Add()
         {
@@ -46,6 +50,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             _apiResourceClaimRepository.Insert(entity);
             return RedirectToAction("List");
         }
+
 
         public IActionResult Edit(int id)
         {
@@ -68,6 +73,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
             return RedirectToAction("List");
         }
+
 
         public IActionResult Delete(int id)
         {
