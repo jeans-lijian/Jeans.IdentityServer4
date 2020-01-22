@@ -1,16 +1,22 @@
 ﻿@{
     var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope".ToLower() };
+    var clientMenu = new[] { "client" };
 }
 @functions
 {
-public string ClassActive(string[] controller_Name, string action_Name = "list")
+public string ClassActive(string controller_name = "", string action_name = "list", string[] parent_name = null)
 {
     var controllerName = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
     var actionName = ViewContext.RouteData.Values["Action"].ToString().ToLower();
 
-    if (controller_Name.Contains(controllerName))
+    if (parent_name != null && parent_name.Length > 0)
     {
-        return "class=active";
+        return parent_name.Contains(controllerName) ? "active" : "";
+    }
+
+    if (controllerName.Equals(controller_name.ToLower()) && actionName.Equals(action_name))
+    {
+        return "active";
     }
 
     return "";
@@ -20,36 +26,73 @@ public string ClassActive(string[] controller_Name, string action_Name = "list")
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">菜单(MENU)</li>
 
-    @*@foreach (var item in (ViewData["Menu"] as List<MenuViewModel>).OrderBy(order => order.Sort))
-        {
-            @await Html.PartialAsync("_MenuItemPartial", item)
-        }*@
-
-    <li @ClassActive(new[] { "home" }, "index")>
+    <li class="@ClassActive("home","index")">
         <a asp-controller="Home" asp-action="Index">
             <i class="fa fa-desktop"></i> <span>控制面板</span>
         </a>
     </li>
-    <li class="treeview">
+    <li class="treeview @ClassActive()">
         <a href="#">
-            <i class="fa fa-address-card-o"></i> <span>身份资源</span>
+            <i class="fa fa-address-card-o"></i> <span>身份资源管理</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
         </ul>
     </li>
-    <li @ClassActive(apiResourceMenu)>
-        <a asp-controller="ApiResource" asp-action="List">
-            <i class="fa fa-book"></i> <span>API资源</span>
+    <li class="treeview @ClassActive(parent_name:apiResourceMenu)">
+        <a href="#">
+            <i class="fa fa-book"></i> <span>API资源管理</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
+        <ul class="treeview-menu">
+            <li class="@ClassActive("ApiResource")">
+                <a asp-controller="ApiResource" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ApiResource List
+                </a>
+            </li>
+            <li class="@ClassActive("ApiResourceClaim")">
+                <a asp-controller="ApiResourceClaim" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ApiResourceClaim List
+                </a>
+            </li>
+        </ul>
     </li>
-    <li @ClassActive(new[] { "client" })>
-        <a asp-controller="Client" asp-action="List">
-            <i class="fa fa-android"></i> <span>客户端</span>
+    <li class="treeview @ClassActive(parent_name:clientMenu)">
+        <a href="#">
+            <i class="fa fa-android"></i> <span>客户端管理</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
+        <ul class="treeview-menu">
+            <li class="@ClassActive("Client")">
+                <a asp-controller="Client" asp-action="List">
+                    <i class="fa fa-circle-o"></i>Client List
+                </a>
+            </li>
+            <li class="@ClassActive()">
+                <a href="#">
+                    <i class="fa fa-circle-o"></i>Link in level 2
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview @ClassActive()">
+        <a href="#">
+            <i class="fa fa-users"></i> <span>用户权限管理</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+        </ul>
     </li>
 </ul>

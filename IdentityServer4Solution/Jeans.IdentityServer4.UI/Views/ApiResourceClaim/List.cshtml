@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Jeans.IdentityServer4.UI.Core.Entity.ApiResourceClaim>
 
 @{
-    ViewData["Title"] = "Api资源声明列表";
+    ViewData["Title"] = "ApiResourceClaim List";
 }
 <section class="content-header clearfix">
     <h1 class="pull-left">@ViewBag.Title</h1>
@@ -9,23 +9,9 @@
 <section class="content container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">操作</h3>
+            <h3 class="panel-title">查询条件</h3>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <form class="form-inline" method="post" asp-controller="ApiResourceClaim" asp-action="Add">
-                    <div asp-validation-summary="ModelOnly" class="help-block"></div>
-                    <input type="hidden" name="ApiResourceId" value="@ViewBag.ApiResourceId" />
-
-                    <div class="form-group">
-                        <label for="Type">Type</label>
-                        <input type="text" class="form-control" id="Type" name="Type" />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">提交</button>
-                </form>
-            </div>
-        </div>
+        <div class="panel-body"></div>
     </div>
 
     <div class="panel panel-default">
@@ -33,13 +19,19 @@
             <h3 class="panel-title">查询结果</h3>
         </div>
         <div class="panel-body">
+            <div class="btn-group margin-bottom">
+                <a asp-controller="ApiResourceClaim" asp-action="Add" class="btn btn-primary" >新  增</a>
+            </div>
+
             <table class="table table-bordered" style="width:100%;">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>#</th>
+                        <th>Id</th>
                         <th>
                             @Html.DisplayNameFor(model => model.Type)
                         </th>
+                        <th>ApiResource.Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,11 +40,18 @@
                         <tr>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group">
-                                    <a asp-controller="ApiResourceClaim" asp-action="Delete" asp-route-id="@item.Id" asp-route-apiResourceId="@item.ApiResourceId" class="btn btn-danger">删 除</a>
+                                    <a asp-controller="ApiResourceClaim" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
+                                    <a asp-controller="ApiResourceClaim" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">删 除</a>
                                 </div>
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApiResource.Name)
                             </td>
                         </tr>
                     }
@@ -61,8 +60,3 @@
         </div>
     </div>
 </section>
-
-@section Scripts{
-    <script>
-    </script>
-}

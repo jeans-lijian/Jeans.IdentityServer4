@@ -19,11 +19,9 @@ namespace Jeans.IdentityServer4.UI.Controllers
             _apiScopeRepository = apiScopeRepository;
         }
 
-        public async Task<IActionResult> List(int apiResourceId)
+        public async Task<IActionResult> List()
         {
-            var results = await _apiScopeRepository.TableNoTracking.Where(w => w.ApiResourceId == apiResourceId).ToListAsync();
-
-            ViewBag.ApiResourceId = apiResourceId;
+            var results = new List<ApiScope>(); //await _apiScopeRepository.TableNoTracking.Where(w => w.ApiResourceId == apiResourceId).ToListAsync();
 
             return View(results);
         }
