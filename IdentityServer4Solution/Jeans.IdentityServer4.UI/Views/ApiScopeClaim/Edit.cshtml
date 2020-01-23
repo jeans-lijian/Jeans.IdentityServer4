@@ -1,0 +1,54 @@
+﻿@model Jeans.IdentityServer4.UI.Core.Entity.ApiScopeClaim
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section class="content-header">
+    <h1>
+        ApiScopeClaim
+        <small>@ViewData["Title"]</small>
+    </h1>
+</section>
+<section class="content container-fluid">
+    <div class="box box-primary">
+
+        <form class="form-horizontal" method="post" asp-action="Add">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="help-block"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" asp-for="Type"></label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="Type">
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" asp-for="ApiScopeId">ApiResource.Name</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" asp-for="ApiScopeId" asp-items="@ViewBag.ApiScopeSelectItemList"></select>
+                        <span asp-validation-for="ApiScopeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="box-footer text-center">
+                <a asp-controller="ApiScopeClaim" asp-action="List" class="btn btn-default pull-left">
+                    <i class="fa fa-arrow-left"></i>
+                    返回列表
+                </a>
+                <button type="reset" class="btn btn-default">重置</button>
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

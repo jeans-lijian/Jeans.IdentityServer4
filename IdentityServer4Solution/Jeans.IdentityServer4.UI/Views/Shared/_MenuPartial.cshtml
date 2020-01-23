@@ -1,20 +1,21 @@
 ﻿@{
-    var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope".ToLower() };
+    var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope", "ApiScopeClaim", "ApiSecret" };
     var clientMenu = new[] { "client" };
 }
 @functions
 {
 public string ClassActive(string controller_name = "", string action_name = "list", string[] parent_name = null)
 {
-    var controllerName = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
-    var actionName = ViewContext.RouteData.Values["Action"].ToString().ToLower();
+    var controllerName = ViewContext.RouteData.Values["Controller"].ToString();
+    var actionName = ViewContext.RouteData.Values["Action"].ToString();
 
     if (parent_name != null && parent_name.Length > 0)
     {
-        return parent_name.Contains(controllerName) ? "active" : "";
+        return parent_name.Contains(controllerName,StringComparer.OrdinalIgnoreCase) ? "active" : "";
     }
 
-    if (controllerName.Equals(controller_name.ToLower()) && actionName.Equals(action_name))
+    if (controllerName.Equals(controller_name,StringComparison.OrdinalIgnoreCase) && 
+        actionName.Equals(action_name,StringComparison.OrdinalIgnoreCase))
     {
         return "active";
     }
@@ -59,6 +60,21 @@ public string ClassActive(string controller_name = "", string action_name = "lis
             <li class="@ClassActive("ApiResourceClaim")">
                 <a asp-controller="ApiResourceClaim" asp-action="List">
                     <i class="fa fa-circle-o"></i>ApiResourceClaim List
+                </a>
+            </li>
+            <li class="@ClassActive("ApiScope")">
+                <a asp-controller="ApiScope" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ApiScope List
+                </a>
+            </li>
+            <li class="@ClassActive("ApiScopeClaim")">
+                <a asp-controller="ApiScopeClaim" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ApiScopeClaim List
+                </a>
+            </li>
+            <li class="@ClassActive("ApiSecret")">
+                <a asp-controller="ApiSecret" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ApiSecret List
                 </a>
             </li>
         </ul>
