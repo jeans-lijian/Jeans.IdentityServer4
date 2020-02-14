@@ -89,7 +89,9 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         private void BindApiResourceList()
         {
-            var dd = _apiResourceRepository.TableNoTracking.OrderBy(by => by.Name).Select(s => new SelectListItem(s.Name, s.Id.ToString())).ToList();
+            var dd = _apiResourceRepository.TableNoTracking
+                            .Where(w => w.Enabled)
+                            .OrderBy(by => by.Name).Select(s => new SelectListItem(s.Name, s.Id.ToString())).ToList();
             ViewBag.ApiResourceSelectItemList = dd;
         }
     }

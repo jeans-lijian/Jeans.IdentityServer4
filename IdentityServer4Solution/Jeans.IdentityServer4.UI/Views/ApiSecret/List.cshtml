@@ -72,7 +72,7 @@
                                 @Html.DisplayFor(modelItem => item.Expiration)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Created.ToString("yyyy-MM-dd HH:mm:ss"))
+                                @item.Created.ToString("yyyy-MM-dd HH:mm:ss")
                             </td>
                         </tr>
                     }

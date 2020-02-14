@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.UI.Controllers
 {
@@ -20,14 +22,18 @@ namespace Jeans.IdentityServer4.UI.Controllers
             _apiResourceRepository = apiResourceRepository;
         }
 
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            var results = new List<ApiSecret>();
+            var results = await _apiSecretRepository.TableNoTracking.Include(x => x.ApiResource)
+                                    .OrderBy(by => by.ApiResource.Name).ToListAsync();
+
             return View(results);
         }
 
         public IActionResult Add()
         {
+            BindApiResourceList();
+
             return View();
         }
 
@@ -35,19 +41,31 @@ namespace Jeans.IdentityServer4.UI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(ApiSecret entity)
         {
+            _apiSecretRepository.Insert(entity);
+
             return RedirectToAction("List");
         }
 
 
         public IActionResult Edit(int id)
         {
-            return View();
+            var entity = _apiSecretRepository.GetById(id);
+            if (entity == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            BindApiResourceList();
+
+            return View(entity);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ApiSecret entity)
         {
+            _apiSecretRepository.Update(entity);
+
             return RedirectToAction("List");
         }
 
@@ -61,6 +79,14 @@ namespace Jeans.IdentityServer4.UI.Controllers
             }
 
             return RedirectToAction("List");
+        }
+
+        private void BindApiResourceList()
+        {
+            var dd = _apiResourceRepository.TableNoTracking.Where(w => w.Enabled)
+                            .OrderBy(by => by.Name).Select(s => new SelectListItem(s.Name, s.Id.ToString())).ToList();
+
+            ViewBag.ApiResourceSelectItemList = dd;
         }
     }
 }
