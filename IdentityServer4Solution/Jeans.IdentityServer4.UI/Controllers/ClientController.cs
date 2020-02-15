@@ -23,7 +23,22 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult List()
         {
+            return View(new List<Client>());
+        }
+
+        public IActionResult Add()
+        {
             return View();
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            return RedirectToAction("List");
         }
     }
 }

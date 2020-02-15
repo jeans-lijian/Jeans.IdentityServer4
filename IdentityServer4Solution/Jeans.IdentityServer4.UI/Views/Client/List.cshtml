@@ -1,287 +1,95 @@
 ﻿@model IEnumerable<Jeans.IdentityServer4.UI.Core.Entity.Client>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Client List";
 }
 
-<h2>List</h2>
+<section class="content-header clearfix">
+    <h1 class="pull-left">@ViewBag.Title</h1>
+</section>
+<section class="content container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询条件</h3>
+        </div>
+        <div class="panel-body"></div>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Enabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProtocolType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequireClientSecret)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientUri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LogoUri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequireConsent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AllowRememberConsent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlwaysIncludeUserClaimsInIdToken)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequirePkce)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AllowPlainTextPkce)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AllowAccessTokensViaBrowser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FrontChannelLogoutUri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FrontChannelLogoutSessionRequired)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BackChannelLogoutUri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BackChannelLogoutSessionRequired)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AllowOfflineAccess)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityTokenLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AllowedIdentityTokenSigningAlgorithms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccessTokenLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AuthorizationCodeLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConsentLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AbsoluteRefreshTokenLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SlidingRefreshTokenLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RefreshTokenUsage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateAccessTokenClaimsOnRefresh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RefreshTokenExpiration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccessTokenType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnableLocalLogin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IncludeJwtId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlwaysSendClientClaims)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientClaimsPrefix)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PairWiseSubjectSalt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastAccessed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserSsoLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserCodeType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeviceCodeLifetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NonEditable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Enabled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProtocolType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequireClientSecret)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientUri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LogoUri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequireConsent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowRememberConsent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlwaysIncludeUserClaimsInIdToken)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequirePkce)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowPlainTextPkce)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowAccessTokensViaBrowser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrontChannelLogoutUri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrontChannelLogoutSessionRequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BackChannelLogoutUri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BackChannelLogoutSessionRequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowOfflineAccess)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityTokenLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowedIdentityTokenSigningAlgorithms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessTokenLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuthorizationCodeLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConsentLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AbsoluteRefreshTokenLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SlidingRefreshTokenLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefreshTokenUsage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateAccessTokenClaimsOnRefresh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefreshTokenExpiration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessTokenType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnableLocalLogin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IncludeJwtId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlwaysSendClientClaims)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientClaimsPrefix)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PairWiseSubjectSalt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastAccessed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserSsoLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserCodeType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeviceCodeLifetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NonEditable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询结果</h3>
+        </div>
+        <div class="panel-body">
+            <div class="btn-group margin-bottom">
+                <a asp-controller="Client" asp-action="Add" class="btn btn-primary">新  增</a>
+            </div>
+
+            <table class="table table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClientId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClientName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClientUri)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LogoUri)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AllowAccessTokensViaBrowser)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Enabled)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <div class="btn-group btn-group-xs" role="group">
+                                <a asp-controller="Client" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
+                                <a asp-controller="Client" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">删 除</a>
+                            </div>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientUri)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LogoUri)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AllowAccessTokensViaBrowser)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Enabled)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
+

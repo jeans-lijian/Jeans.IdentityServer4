@@ -22,5 +22,21 @@ namespace Jeans.IdentityServer4.UI.Controllers
         {
             return View();
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            return RedirectToAction("List");
+        }
+
     }
 }
