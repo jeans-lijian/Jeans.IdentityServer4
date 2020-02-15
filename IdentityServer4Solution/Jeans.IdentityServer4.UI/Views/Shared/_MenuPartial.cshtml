@@ -1,6 +1,7 @@
 ﻿@{
     var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope", "ApiScopeClaim", "ApiSecret" };
-    var clientMenu = new[] { "client" };
+    var clientMenu = new[] { "client", "ClientClaim", "ClientCorsOrigin", "ClientGrantType", "ClientIdPRestriction",
+                                   "ClientPostLogoutRedirectUri", "ClientProperty","ClientRedirectUri","ClientScope","ClientSecret" };
 }
 @functions
 {
@@ -11,11 +12,11 @@ public string ClassActive(string controller_name = "", string action_name = "lis
 
     if (parent_name != null && parent_name.Length > 0)
     {
-        return parent_name.Contains(controllerName,StringComparer.OrdinalIgnoreCase) ? "active" : "";
+        return parent_name.Contains(controllerName, StringComparer.OrdinalIgnoreCase) ? "active" : "";
     }
 
-    if (controllerName.Equals(controller_name,StringComparison.OrdinalIgnoreCase) && 
-        actionName.Equals(action_name,StringComparison.OrdinalIgnoreCase))
+    if (controllerName.Equals(controller_name, StringComparison.OrdinalIgnoreCase) &&
+        actionName.Equals(action_name, StringComparison.OrdinalIgnoreCase))
     {
         return "active";
     }
@@ -92,9 +93,49 @@ public string ClassActive(string controller_name = "", string action_name = "lis
                     <i class="fa fa-circle-o"></i>Client List
                 </a>
             </li>
-            <li class="@ClassActive()">
-                <a href="#">
-                    <i class="fa fa-circle-o"></i>Link in level 2
+            <li class="@ClassActive("ClientClaim")">
+                <a asp-controller="ClientClaim" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientClaim List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientCorsOrigin")">
+                <a asp-controller="ClientCorsOrigin" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientCorsOrigin List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientGrantType")">
+                <a asp-controller="ClientGrantType" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientGrantType List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientIdPRestriction")">
+                <a asp-controller="ClientIdPRestriction" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientIdPRestriction List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientPostLogoutRedirectUri")">
+                <a asp-controller="ClientPostLogoutRedirectUri" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientPostLogoutRedirectUri <br />List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientProperty")">
+                <a asp-controller="ClientProperty" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientProperty List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientRedirectUri")">
+                <a asp-controller="ClientRedirectUri" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientRedirectUri List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientScope")">
+                <a asp-controller="ClientScope" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientScope List
+                </a>
+            </li>
+            <li class="@ClassActive("ClientSecret")">
+                <a asp-controller="ClientSecret" asp-action="List">
+                    <i class="fa fa-circle-o"></i>ClientSecret List
                 </a>
             </li>
         </ul>

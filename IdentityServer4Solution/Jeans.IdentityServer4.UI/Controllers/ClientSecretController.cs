@@ -9,14 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jeans.IdentityServer4.UI.Controllers
 {
-    /// <summary>
-    /// 客户端
-    /// </summary>
     [Authorize]
-    public class ClientController : Controller
+    public class ClientSecretController : Controller
     {
-        private readonly IRepository<Client> _repository;
-        public ClientController(IRepository<Client> repository)
+        private readonly IRepository<ClientSecret> _repository;
+        public ClientSecretController(IRepository<ClientSecret> repository)
         {
             _repository = repository;
         }
