@@ -1,7 +1,8 @@
 ﻿@{
     var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope", "ApiScopeClaim", "ApiSecret" };
     var clientMenu = new[] { "client", "ClientClaim", "ClientCorsOrigin", "ClientGrantType", "ClientIdPRestriction",
-                                   "ClientPostLogoutRedirectUri", "ClientProperty","ClientRedirectUri","ClientScope","ClientSecret" };
+                           "ClientPostLogoutRedirectUri", "ClientProperty","ClientRedirectUri","ClientScope","ClientSecret" };
+    var authMenu = new[] { "User"};
 }
 @functions
 {
@@ -140,7 +141,7 @@ public string ClassActive(string controller_name = "", string action_name = "lis
             </li>
         </ul>
     </li>
-    <li class="treeview @ClassActive()">
+    <li class="treeview @ClassActive(parent_name:authMenu)">
         <a href="#">
             <i class="fa fa-users"></i> <span>用户权限管理</span>
             <span class="pull-right-container">
@@ -148,8 +149,11 @@ public string ClassActive(string controller_name = "", string action_name = "lis
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
-            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+            <li class="@ClassActive("User")">
+                <a asp-controller="User" asp-action="List">
+                    <i class="fa fa-circle-o"></i>User List
+                </a>
+            </li>
         </ul>
     </li>
 </ul>

@@ -47,6 +47,10 @@ namespace Jeans.IdentityServer4.UI
             {
                 options.UseSqlServer(Configuration.GetConnectionString("identityserver"));
             });
+            services.AddDbContext<ObjectDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("identity"));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

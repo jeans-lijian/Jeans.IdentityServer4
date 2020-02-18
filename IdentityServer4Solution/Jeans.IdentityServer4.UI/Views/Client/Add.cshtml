@@ -16,6 +16,7 @@
         <form class="form-horizontal" method="post" asp-action="Add">
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="help-block"></div>
+                @Html.AntiForgeryToken()
 
                 <div class="form-group">
                     <label asp-for="ClientId" class="col-sm-3 control-label"></label>

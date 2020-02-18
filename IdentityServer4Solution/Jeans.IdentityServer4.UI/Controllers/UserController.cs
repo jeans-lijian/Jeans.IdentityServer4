@@ -4,35 +4,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.UI.Controllers
 {
-    public class ClientPropertyController : BaseController
+    public class UserController : Controller
     {
-        private readonly IRepository<ClientProperty> _repository;
-        public ClientPropertyController(IRepository<ClientProperty> repository, IRepository<Client> clientRepository) : base(clientRepository)
+        private readonly IRepository<UserEntity> _repository;
+        public UserController(IRepository<UserEntity> repository)
         {
             _repository = repository;
         }
 
         public async Task<IActionResult> List()
         {
-            var results = await _repository.TableNoTracking.OrderBy(by => by.Client.ClientName).ToListAsync();
+            var results = await _repository.TableNoTracking.OrderBy(by => by.UserName).ToListAsync();
             return View(results);
         }
 
+
         public IActionResult Add()
         {
-            BindClientList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(ClientProperty entity)
+        public IActionResult Add(UserEntity entity)
         {
             _repository.Insert(entity);
 
@@ -48,14 +47,12 @@ namespace Jeans.IdentityServer4.UI.Controllers
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            BindClientList();
-
             return View(entity);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ClientProperty entity)
+        public IActionResult Edit(UserEntity entity)
         {
             _repository.Update(entity);
 

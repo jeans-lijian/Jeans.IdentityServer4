@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Jeans.IdentityServer4.UI.Core.Entity.UserEntity>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<section class="content-header clearfix">
+    <h1 class="pull-left">@ViewBag.Title</h1>
+</section>
+<section class="content container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询条件</h3>
+        </div>
+        <div class="panel-body"></div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询结果</h3>
+        </div>
+        <div class="panel-body">
+            <div class="btn-group margin-bottom">
+                <a asp-controller="User" asp-action="Add" class="btn btn-primary">新  增</a>
+            </div>
+
+            <table class="table table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-group btn-group-xs" role="group">
+                                    <a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
+                                    <a asp-controller="User" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">删 除</a>
+                                </div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
