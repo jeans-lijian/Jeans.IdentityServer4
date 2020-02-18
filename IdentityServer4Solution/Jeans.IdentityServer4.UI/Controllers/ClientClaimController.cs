@@ -6,6 +6,7 @@ using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.UI.Controllers
 {
@@ -20,7 +21,8 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult List()
         {
-            return View();
+            //var results = _repository.TableNoTracking.OrderBy(by => by.Client.ClientName).ToListAsync();
+            return View(new List<ClientClaim>());
         }
 
         public IActionResult Add()

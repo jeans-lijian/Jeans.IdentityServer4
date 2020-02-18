@@ -1,47 +1,66 @@
 ﻿@model IEnumerable<Jeans.IdentityServer4.UI.Core.Entity.ClientIdPRestriction>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "ClientIdPRestriction List";
 }
 
-<h2>List</h2>
+<section class="content-header clearfix">
+    <h1 class="pull-left">@ViewBag.Title</h1>
+</section>
+<section class="content container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询条件</h3>
+        </div>
+        <div class="panel-body"></div>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Provider)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provider)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">查询结果</h3>
+        </div>
+        <div class="panel-body">
+            <div class="btn-group margin-bottom">
+                <a asp-controller="ClientIdPRestriction" asp-action="Add" class="btn btn-primary">新  增</a>
+            </div>
+
+            <table class="table table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            Client.Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Provider)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <div class="btn-group btn-group-xs" role="group">
+                                <a asp-controller="ClientIdPRestriction" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">编 辑</a>
+                                <a asp-controller="ClientIdPRestriction" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">删 除</a>
+                            </div>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.ClientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provider)
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+

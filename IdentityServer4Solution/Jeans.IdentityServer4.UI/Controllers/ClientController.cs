@@ -23,6 +23,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult List()
         {
+            //var results = _repository.TableNoTracking.OrderBy(by => by.Client.ClientName).ToListAsync();
             return View(new List<Client>());
         }
 

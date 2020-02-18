@@ -20,7 +20,8 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult List()
         {
-            return View();
+            //var results = _repository.TableNoTracking.OrderBy(by => by.Client.ClientName).ToListAsync();
+            return View(new List<ClientSecret>());
         }
 
         public IActionResult Add()
