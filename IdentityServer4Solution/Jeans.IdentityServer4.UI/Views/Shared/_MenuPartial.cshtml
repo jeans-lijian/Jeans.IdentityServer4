@@ -1,8 +1,8 @@
 ﻿@{
     var apiResourceMenu = new[] { "apiresource", "apiresourceclaim", "ApiScope", "ApiScopeClaim", "ApiSecret" };
     var clientMenu = new[] { "client", "ClientClaim", "ClientCorsOrigin", "ClientGrantType", "ClientIdPRestriction",
-                           "ClientPostLogoutRedirectUri", "ClientProperty","ClientRedirectUri","ClientScope","ClientSecret" };
-    var authMenu = new[] { "User"};
+   "ClientPostLogoutRedirectUri", "ClientProperty","ClientRedirectUri","ClientScope","ClientSecret" };
+    var authMenu = new[] { "User" };
 }
 @functions
 {
@@ -34,7 +34,7 @@ public string ClassActive(string controller_name = "", string action_name = "lis
             <i class="fa fa-desktop"></i> <span>控制面板</span>
         </a>
     </li>
-    <li class="treeview @ClassActive()">
+    <li class="treeview @ClassActive(parent_name: new[] { "IdentityResource"})">
         <a href="#">
             <i class="fa fa-address-card-o"></i> <span>身份资源管理</span>
             <span class="pull-right-container">
@@ -42,8 +42,11 @@ public string ClassActive(string controller_name = "", string action_name = "lis
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
-            <li class="@ClassActive()"><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+            <li class="@ClassActive("IdentityResource")">
+                <a asp-controller="IdentityResource" asp-action="List">
+                    <i class="fa fa-circle-o"></i>IdentityResource List
+                </a>
+            </li>
         </ul>
     </li>
     <li class="treeview @ClassActive(parent_name:apiResourceMenu)">

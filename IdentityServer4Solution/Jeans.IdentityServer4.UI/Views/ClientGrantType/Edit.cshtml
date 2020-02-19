@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label asp-for="GrantType" class="col-sm-2 control-label"></label><div class="col-sm-8">
-                        <input asp-for="GrantType" class="form-control" />
+                        <select class="form-control" asp-for="GrantType" asp-items="@ViewBag.GrantTypeSelectItemList"></select>
                         <span asp-validation-for="GrantType" class="text-danger"></span>
                     </div>
                 </div>

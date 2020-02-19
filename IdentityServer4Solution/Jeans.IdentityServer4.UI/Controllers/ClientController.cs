@@ -6,6 +6,7 @@ using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.UI.Controllers
@@ -32,6 +33,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult Add()
         {
+            BindProtocolTypes();
             return View(new Client());
         }
 
@@ -52,6 +54,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             {
                 throw new ArgumentNullException(nameof(entity));
             }
+            BindProtocolTypes();
 
             return View(entity);
         }
@@ -65,6 +68,14 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return RedirectToAction("List");
         }
 
+        public async Task<IActionResult> Show(int id)
+        {
+            var entity = await _repository.TableNoTracking.Include(x => x.ClientGrantTypes)
+                .Include(x => x.ClientSecrets)
+                .Include(x => x.ClientScopes).FirstOrDefaultAsync(w => w.Id == id);
+
+            return View(entity);
+        }
 
         public IActionResult Delete(int id)
         {
@@ -75,6 +86,18 @@ namespace Jeans.IdentityServer4.UI.Controllers
             }
 
             return RedirectToAction("List");
+        }
+
+        private void BindProtocolTypes()
+        {
+            var ddl = new List<SelectListItem>
+            {
+                new SelectListItem("OpenIdConnect","oidc"),
+                new SelectListItem("WsFederation","wsfed"),
+                new SelectListItem("Saml2p","saml2p")
+            };
+
+            ViewBag.ProtocolTypeSelectList = ddl;
         }
     }
 }

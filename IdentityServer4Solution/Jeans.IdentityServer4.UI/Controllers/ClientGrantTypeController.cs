@@ -6,6 +6,7 @@ using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jeans.IdentityServer4.UI.Controllers
@@ -20,11 +21,12 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public async Task<IActionResult> List()
         {
-            var results =await  _repository.TableNoTracking.Include(x => x.Client).OrderBy(by => by.Client.ClientName).ToListAsync();
+            var results = await _repository.TableNoTracking.Include(x => x.Client).OrderBy(by => by.Client.ClientName).ToListAsync();
             return View(results);
         }
         public IActionResult Add()
         {
+            BindGrantTypeList();
             BindClientList();
             return View();
         }
@@ -47,6 +49,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
                 throw new ArgumentNullException(nameof(entity));
             }
 
+            BindGrantTypeList();
             BindClientList();
 
             return View(entity);
@@ -71,6 +74,21 @@ namespace Jeans.IdentityServer4.UI.Controllers
             }
 
             return RedirectToAction("List");
+        }
+
+        private void BindGrantTypeList()
+        {
+            var dd = new List<SelectListItem>
+            {
+                new SelectListItem("Implicit" , "implicit"),
+                new SelectListItem("Hybrid" , "hybrid"),
+                new SelectListItem("AuthorizationCode" , "authorization_code"),
+                new SelectListItem("ClientCredentials" , "client_credentials"),
+                new SelectListItem("ResourceOwnerPassword" , "password"),
+                new SelectListItem("DeviceFlow" , "urn:ietf:params:oauth:grant-type:device_code")
+            };
+
+            ViewBag.GrantTypeSelectItemList = dd;
         }
 
     }
