@@ -32,7 +32,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            return View(new Client());
         }
 
         [HttpPost]

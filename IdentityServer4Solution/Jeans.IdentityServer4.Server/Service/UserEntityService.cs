@@ -7,8 +7,8 @@ namespace Jeans.IdentityServer4.Server.Service
 {
     public class UserEntityService : IUserEntityService
     {
-        private readonly IRepository<UserEntity> _userRepository;
-        public UserEntityService(IRepository<UserEntity> userRepository)
+        private readonly IObjectRepository<UserEntity> _userRepository;
+        public UserEntityService(IObjectRepository<UserEntity> userRepository)
         {
             _userRepository = userRepository;
         }

@@ -18,7 +18,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
         public async Task<IActionResult> List()
         {
-            var results =await  _repository.TableNoTracking.OrderBy(by => by.Client.ClientName).ToListAsync();
+            var results =await  _repository.TableNoTracking.Include(x=>x.Client).OrderBy(by => by.Client.ClientName).ToListAsync();
             return View(results);
         }
 

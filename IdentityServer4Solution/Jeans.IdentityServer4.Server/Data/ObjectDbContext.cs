@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Data
 {
-    public class ObjectDbContext : DbContext, IDbContext
+    public class ObjectDbContext : DbContext, IObjectDbContext
     {
         public ObjectDbContext(DbContextOptions<ObjectDbContext> options) : base(options)
         {

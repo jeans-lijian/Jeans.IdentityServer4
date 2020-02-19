@@ -11,8 +11,8 @@ namespace Jeans.IdentityServer4.UI.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IRepository<UserEntity> _repository;
-        public UserController(IRepository<UserEntity> repository)
+        private readonly IIdentityRepository<UserEntity> _repository;
+        public UserController(IIdentityRepository<UserEntity> repository)
         {
             _repository = repository;
         }

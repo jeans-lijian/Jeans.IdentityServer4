@@ -11,9 +11,10 @@ namespace Jeans.IdentityServer4.UI.Core.AutofacConfig
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<IdentityServerDbContext>().As<IDbContext>().InstancePerLifetimeScope();
-            builder.RegisterType<ObjectDbContext>().As<IDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ObjectDbContext>().As<IIdentityDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<IdentityServerDbContext>().As<IDbContext>().InstancePerLifetimeScope();            
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(IdentityEfRepository<>)).As(typeof(IIdentityRepository<>)).InstancePerLifetimeScope();
         }
     }
 }
