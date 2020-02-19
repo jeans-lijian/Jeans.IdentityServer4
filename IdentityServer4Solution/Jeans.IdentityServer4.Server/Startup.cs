@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IdentityServer4;
 using Jeans.IdentityServer4.Server.Configuration;
 using Jeans.IdentityServer4.Server.Data;
 using Jeans.IdentityServer4.Server.Extensions;
