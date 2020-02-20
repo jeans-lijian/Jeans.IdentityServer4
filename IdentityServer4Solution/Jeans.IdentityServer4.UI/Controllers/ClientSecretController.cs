@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer4.Models;
+﻿using IdentityServer4.Models;
 using Jeans.IdentityServer4.UI.Core.Entity;
 using Jeans.IdentityServer4.UI.Data;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Client = Jeans.IdentityServer4.UI.Core.Entity.Client;
 
 namespace Jeans.IdentityServer4.UI.Controllers
@@ -36,7 +34,6 @@ namespace Jeans.IdentityServer4.UI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(ClientSecret entity)
         {
-            entity.Value = entity.Value.Sha256();
             _repository.Insert(entity);
 
             return RedirectToAction("List");

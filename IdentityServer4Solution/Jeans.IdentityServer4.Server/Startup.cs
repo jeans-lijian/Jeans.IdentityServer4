@@ -37,6 +37,7 @@ namespace Jeans.IdentityServer4.Server
             });
 
             services.AddIdentityServer()
+                    .AddDeveloperSigningCredential()
                     .AddClientStore<JeansClientStore>()
                     .AddResourceStore<JeansResourceStore>()
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
@@ -51,7 +52,7 @@ namespace Jeans.IdentityServer4.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            InitializeDatabase(app);
+            //InitializeDatabase(app);
 
             if (env.IsDevelopment())
             {
@@ -117,7 +118,7 @@ namespace Jeans.IdentityServer4.Server
             {
                 var objectContext = serviceScope.ServiceProvider.GetRequiredService<ObjectDbContext>();
                 objectContext.Database.Migrate();
-                
+
                 if (!objectContext.UserEntities.Any())
                 {
                     foreach (var item in Config.GetUsers())

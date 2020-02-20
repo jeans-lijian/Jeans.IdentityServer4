@@ -35,7 +35,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                 {
                     Type = s.Type,
-                    Value = s.Value,
+                    Value = s.Value.Sha256(),
                     Description = s.Description,
                     Expiration = s.Expiration
                 }).ToList(),

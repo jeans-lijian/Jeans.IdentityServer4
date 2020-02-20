@@ -34,7 +34,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
         {
             BindApiResourceList();
 
-            return View();
+            return View(new ApiSecret());
         }
 
         [HttpPost]

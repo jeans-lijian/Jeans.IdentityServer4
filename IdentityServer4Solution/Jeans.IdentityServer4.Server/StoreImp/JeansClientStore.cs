@@ -65,11 +65,11 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 ClientSecrets = entity.ClientSecrets.Select(s => new Secret
                 {
                     Type = s.Type,
-                    Value = s.Value,
+                    Value = s.Value.Sha256(),
                     Expiration = s.Expiration,
                     Description = s.Description
                 }).ToList(),
-                AllowedScopes = entity.ClientScopes.Select(s => s.Scope).ToList(),
+                AllowedScopes = entity.ClientScopes.Select(s =>s.Scope).ToList(),
                 Claims = entity.ClientClaims.Select(s => new Claim(s.Type, s.Value)).ToList(),
                 IdentityProviderRestrictions = entity.ClientIdPRestrictions.Select(s => s.Provider).ToList(),
                 Properties = entity.ClientProperties.ToDictionary(k => k.Key, v => v.Value),
