@@ -30,7 +30,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             {
                 context.Result = new GrantValidationResult(
                     TokenRequestErrors.InvalidGrant,
-                    "invalid username or password");
+                    "invalid username or password!");
             }
         }
 
