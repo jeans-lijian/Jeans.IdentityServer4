@@ -11,6 +11,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
     public class JeansResourceOwnerValidator : IResourceOwnerPasswordValidator
     {
         private readonly IUserEntityService _userEntityService;
+
         public JeansResourceOwnerValidator(IUserEntityService userEntityService)
         {
             _userEntityService = userEntityService;
@@ -33,6 +34,5 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     "invalid username or password!");
             }
         }
-
     }
 }

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using IdentityServer4;
 using Jeans.IdentityServer4.Server.Configuration;
 using Jeans.IdentityServer4.Server.Data;
 using Jeans.IdentityServer4.Server.Extensions;
-using Jeans.IdentityServer4.Server.StoreImp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
 
 namespace Jeans.IdentityServer4.Server
 {
@@ -26,34 +23,35 @@ namespace Jeans.IdentityServer4.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IdentityServerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identityserver")));
-            services.AddDbContext<ObjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identity")));
+            services.AddDbContext<IdentityServerDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Ids4Conn")));
+            //services.AddDbContext<ObjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identity")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
+                    .AddTestUsers(MemoryConfig.GetTestUsers())
+                    .AddInMemoryApiResources(MemoryConfig.GetApiResources())
+                    .AddInMemoryClients(MemoryConfig.GetClients());
+
+            /*
                     .AddClientStore<JeansClientStore>()
                     .AddResourceStore<JeansResourceStore>()
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
                     .AddProfileService<JeansProfileService>();
+                    */
 
             services.AddDefaultDi();
-
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //InitializeDatabase(app);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,57 +76,5 @@ namespace Jeans.IdentityServer4.Server
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-        private void InitializeDatabase(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<IdentityServerDbContext>();
-                context.Database.Migrate();
-
-                if (!context.Clients.Any())
-                {
-                    foreach (var item in Config.GetClients())
-                    {
-                        context.Clients.Add(item);
-                    }
-                    context.SaveChanges();
-                }
-
-                if (!context.ApiResources.Any())
-                {
-                    foreach (var item in Config.GetApiResources())
-                    {
-                        context.ApiResources.Add(item);
-                    }
-                    context.SaveChanges();
-                }
-
-                if (!context.IdentityResources.Any())
-                {
-                    foreach (var item in Config.GetIdentityResources())
-                    {
-                        context.IdentityResources.Add(item);
-                    }
-                    context.SaveChanges();
-                }
-            }
-
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var objectContext = serviceScope.ServiceProvider.GetRequiredService<ObjectDbContext>();
-                objectContext.Database.Migrate();
-
-                if (!objectContext.UserEntities.Any())
-                {
-                    foreach (var item in Config.GetUsers())
-                    {
-                        objectContext.UserEntities.Add(item);
-                    }
-                    objectContext.SaveChanges();
-                }
-            }
-        }
-
     }
 }

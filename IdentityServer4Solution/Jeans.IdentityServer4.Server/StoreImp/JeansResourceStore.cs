@@ -1,7 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Jeans.IdentityServer4.Server.Service;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +10,11 @@ namespace Jeans.IdentityServer4.Server.StoreImp
     public class JeansResourceStore : IResourceStore
     {
         private readonly IResourceService _resourceService;
+
         public JeansResourceStore(IResourceService resourceService)
         {
             _resourceService = resourceService;
         }
-
 
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
@@ -31,7 +30,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 Enabled = entity.Enabled,
                 DisplayName = entity.DisplayName,
                 Description = entity.Description,
-                Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
+                //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
                 ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                 {
                     Type = s.Type,
@@ -47,9 +46,9 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Required = s.Required,
                     Emphasize = s.Emphasize,
                     ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                    UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                    //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                 }).ToList(),
-                UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
             };
 
             return apiResource;
@@ -72,7 +71,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Enabled = entity.Enabled,
                     DisplayName = entity.DisplayName,
                     Description = entity.Description,
-                    Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
+                    //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
                     ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                     {
                         Type = s.Type,
@@ -88,9 +87,9 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                         Required = s.Required,
                         Emphasize = s.Emphasize,
                         ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                        UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                        //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                     }).ToList(),
-                    UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                    //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
                 };
 
                 results.Add(apiResource);
@@ -116,8 +115,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Enabled = entity.Enabled,
                     DisplayName = entity.DisplayName,
                     Description = entity.Description,
-                    Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
-                    UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
+                    //Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
+                    //UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
                 };
 
                 results.Add(identityResource);
@@ -142,7 +141,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Enabled = entity.Enabled,
                     DisplayName = entity.DisplayName,
                     Description = entity.Description,
-                    Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
+                    //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
                     ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                     {
                         Type = s.Type,
@@ -158,9 +157,9 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                         Required = s.Required,
                         Emphasize = s.Emphasize,
                         ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                        UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                        //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                     }).ToList(),
-                    UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                   // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
                 };
 
                 apiResourceResults.Add(apiResource);
@@ -174,8 +173,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Enabled = entity.Enabled,
                     DisplayName = entity.DisplayName,
                     Description = entity.Description,
-                    Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
-                    UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
+                    //Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
+                    //UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
                 };
 
                 identityResourceResults.Add(identityResource);
@@ -183,6 +182,5 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
             return new Resources(identityResourceResults, apiResourceResults);
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Jeans.IdentityServer4.Server.Core;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Data
 {
@@ -9,15 +10,18 @@ namespace Jeans.IdentityServer4.Server.Data
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }
 
-        TEntity GetById(object key);
+        Task<TEntity> GetById(object key);
 
-        void Insert(TEntity entity);
-        void Insert(IEnumerable<TEntity> entities);
+        Task Insert(TEntity entity);
 
-        void Update(TEntity entity);
-        void Update(IEnumerable<TEntity> entities);
+        Task Insert(IEnumerable<TEntity> entities);
 
-        void Delete(TEntity entity);
-        void Delete(IEnumerable<TEntity> entities);
+        Task Update(TEntity entity);
+
+        Task Update(IEnumerable<TEntity> entities);
+
+        Task Delete(TEntity entity);
+
+        Task Delete(IEnumerable<TEntity> entities);
     }
 }

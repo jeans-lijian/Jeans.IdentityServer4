@@ -6,12 +6,10 @@ namespace Jeans.IdentityServer4.Server.Migrations.ObjectDb
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
     }
 }

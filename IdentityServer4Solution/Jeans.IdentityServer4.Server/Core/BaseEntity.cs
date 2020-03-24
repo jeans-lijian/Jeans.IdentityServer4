@@ -1,7 +1,9 @@
-﻿namespace Jeans.IdentityServer4.Server.Core
+﻿using System;
+
+namespace Jeans.IdentityServer4.Server.Core
 {
     public abstract class BaseEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

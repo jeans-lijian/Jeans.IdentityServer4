@@ -12,12 +12,15 @@ namespace Jeans.IdentityServer4.Server.Data
         TEntity GetById(object key);
 
         void Insert(TEntity entity);
+
         void Insert(IEnumerable<TEntity> entities);
 
         void Update(TEntity entity);
+
         void Update(IEnumerable<TEntity> entities);
 
         void Delete(TEntity entity);
+
         void Delete(IEnumerable<TEntity> entities);
     }
 }

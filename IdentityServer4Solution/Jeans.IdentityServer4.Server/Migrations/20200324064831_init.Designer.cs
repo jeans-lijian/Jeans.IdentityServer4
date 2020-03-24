@@ -3,14 +3,16 @@ using System;
 using Jeans.IdentityServer4.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Jeans.IdentityServer4.Server.Migrations
 {
     [DbContext(typeof(IdentityServerDbContext))]
-    partial class IdentityServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200324064831_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

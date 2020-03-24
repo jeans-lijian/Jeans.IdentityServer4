@@ -8,6 +8,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ApiSecret> builder)
         {
+            builder.ToTable("apisecrets");
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Description).HasMaxLength(1000);
             builder.Property(p => p.Value).HasMaxLength(4000).IsRequired();

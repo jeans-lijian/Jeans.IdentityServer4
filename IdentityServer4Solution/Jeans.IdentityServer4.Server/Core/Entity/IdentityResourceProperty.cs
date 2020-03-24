@@ -1,9 +1,4 @@
-﻿using Jeans.IdentityServer4.Server.Core;
-using Jeans.IdentityServer4.Server.Core.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -15,7 +10,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public string Key { get; set; }
         public string Value { get; set; }
 
-        public int IdentityResourceId { get; set; }
+        public Guid IdentityResourceId { get; set; }
         public IdentityResource IdentityResource { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -54,14 +52,14 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public int DeviceCodeLifetime { get; set; } = 300;
         public bool NonEditable { get; set; }
 
-        public List<ClientClaim> ClientClaims { get; set; }
-        public List<ClientCorsOrigin> ClientCorsOrigins { get; set; }
+        //public List<ClientClaim> ClientClaims { get; set; }
+        //public List<ClientCorsOrigin> ClientCorsOrigins { get; set; }
         public List<ClientGrantType> ClientGrantTypes { get; set; }
-        public List<ClientProperty> ClientProperties { get; set; }
-        public List<ClientRedirectUri> ClientRedirectUris { get; set; }
+        //public List<ClientProperty> ClientProperties { get; set; }
+        //public List<ClientRedirectUri> ClientRedirectUris { get; set; }
         public List<ClientScope> ClientScopes { get; set; }
         public List<ClientSecret> ClientSecrets { get; set; }
-        public List<ClientIdPRestriction> ClientIdPRestrictions { get; set; }
-        public List<ClientPostLogoutRedirectUri> ClientPostLogoutRedirectUris { get; set; }
+        //public List<ClientIdPRestriction> ClientIdPRestrictions { get; set; }
+        //public List<ClientPostLogoutRedirectUri> ClientPostLogoutRedirectUris { get; set; }
     }
 }

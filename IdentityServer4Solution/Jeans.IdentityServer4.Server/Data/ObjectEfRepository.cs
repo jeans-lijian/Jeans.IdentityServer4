@@ -10,6 +10,7 @@ namespace Jeans.IdentityServer4.Server.Data
     {
         private readonly IObjectDbContext _context;
         private DbSet<TEntity> _entities;
+
         public ObjectEfRepository(IObjectDbContext context)
         {
             _context = context;
@@ -31,9 +32,7 @@ namespace Jeans.IdentityServer4.Server.Data
         public IQueryable<TEntity> Table => Entities;
         public IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-
         public TEntity GetById(object key) => Entities.Find(key);
-
 
         public void Insert(TEntity entity)
         {
@@ -71,7 +70,6 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-
         public void Update(TEntity entity)
         {
             if (entity == null)
@@ -107,7 +105,6 @@ namespace Jeans.IdentityServer4.Server.Data
                 throw new Exception(ex.Message);
             }
         }
-
 
         public void Delete(TEntity entity)
         {

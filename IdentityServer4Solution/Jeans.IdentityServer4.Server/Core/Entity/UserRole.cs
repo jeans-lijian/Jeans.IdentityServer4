@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -10,7 +7,6 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public string Name { get; set; }
 
         public string Description { get; set; }
-
 
         public List<UserEntityRoleRelation> UserEntityRoleRelations { get; set; }
     }

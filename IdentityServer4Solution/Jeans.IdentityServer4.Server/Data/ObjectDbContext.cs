@@ -2,9 +2,6 @@
 using Jeans.IdentityServer4.Server.Core.Entity;
 using Jeans.IdentityServer4.Server.Data.UserMapping;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Data
@@ -29,7 +26,6 @@ namespace Jeans.IdentityServer4.Server.Data
         public DbSet<UserEntityClaim> UserEntityClaims { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserEntityRoleRelation> UserEntityRoleRelations { get; set; }
-
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {

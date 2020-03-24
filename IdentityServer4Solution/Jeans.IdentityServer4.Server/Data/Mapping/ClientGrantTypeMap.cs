@@ -8,6 +8,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ClientGrantType> builder)
         {
+            builder.ToTable("clientgranttypes");
             builder.HasKey(k => k.Id);
             builder.Property(p => p.GrantType).HasMaxLength(250).IsRequired();
         }

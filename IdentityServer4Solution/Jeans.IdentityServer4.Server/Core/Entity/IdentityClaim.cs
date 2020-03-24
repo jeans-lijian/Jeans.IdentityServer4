@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -12,7 +9,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
     {
         public string Type { get; set; }
 
-        public int IdentityResourceId { get; set; }
+        public Guid IdentityResourceId { get; set; }
         public IdentityResource IdentityResource { get; set; }
     }
 }

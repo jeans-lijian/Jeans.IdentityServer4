@@ -13,6 +13,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
     public class JeansProfileService : IProfileService
     {
         private readonly IUserEntityService _userEntityService;
+
         public JeansProfileService(IUserEntityService userEntityService)
         {
             _userEntityService = userEntityService;

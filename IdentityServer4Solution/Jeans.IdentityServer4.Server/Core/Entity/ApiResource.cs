@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -20,8 +18,8 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public DateTime? LastAccessed { get; set; }
         public bool NonEditable { get; set; }
 
-        public List<ApiResourceProperty> ApiResourceProperties { get; set; }
-        public List<ApiResourceClaim> ApiResourceClaims { get; set; }
+        //public List<ApiResourceProperty> ApiResourceProperties { get; set; }
+        //public List<ApiResourceClaim> ApiResourceClaims { get; set; }
         public List<ApiScope> ApiScopes { get; set; }
         public List<ApiSecret> ApiSecrets { get; set; }
     }

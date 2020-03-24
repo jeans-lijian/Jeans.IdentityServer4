@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Data
 {
@@ -10,6 +11,7 @@ namespace Jeans.IdentityServer4.Server.Data
     {
         private readonly IDbContext _context;
         private DbSet<TEntity> _entities;
+
         public EfRepository(IDbContext context)
         {
             _context = context;
@@ -31,11 +33,9 @@ namespace Jeans.IdentityServer4.Server.Data
         public IQueryable<TEntity> Table => Entities;
         public IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
+        public async Task<TEntity> GetById(object key) =>await  Entities.FindAsync(key);
 
-        public TEntity GetById(object key) => Entities.Find(key);
-
-
-        public void Insert(TEntity entity)
+        public async Task Insert(TEntity entity)
         {
             if (entity == null)
             {
@@ -45,7 +45,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.Add(entity);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -53,7 +53,7 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-        public void Insert(IEnumerable<TEntity> entities)
+        public async Task Insert(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -63,7 +63,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.AddRange(entities);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -71,8 +71,7 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             if (entity == null)
             {
@@ -82,7 +81,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.Update(entity);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -90,7 +89,7 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-        public void Update(IEnumerable<TEntity> entities)
+        public async Task Update(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -100,7 +99,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.UpdateRange(entities);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -108,8 +107,7 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             if (entity == null)
             {
@@ -119,7 +117,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.Remove(entity);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -127,7 +125,7 @@ namespace Jeans.IdentityServer4.Server.Data
             }
         }
 
-        public void Delete(IEnumerable<TEntity> entities)
+        public async Task Delete(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -137,7 +135,7 @@ namespace Jeans.IdentityServer4.Server.Data
             try
             {
                 Entities.RemoveRange(entities);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
