@@ -30,7 +30,6 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 Enabled = entity.Enabled,
                 DisplayName = entity.DisplayName,
                 Description = entity.Description,
-                //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
                 ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                 {
                     Type = s.Type,
@@ -63,7 +62,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             }
 
             List<ApiResource> results = new List<ApiResource>();
-            entities.ToList().ForEach(entity =>
+            foreach (var entity in entities)
             {
                 ApiResource apiResource = new ApiResource
                 {
@@ -71,7 +70,6 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Enabled = entity.Enabled,
                     DisplayName = entity.DisplayName,
                     Description = entity.Description,
-                    //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
                     ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                     {
                         Type = s.Type,
@@ -93,7 +91,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 };
 
                 results.Add(apiResource);
-            });
+            }
 
             return results;
         }
@@ -107,7 +105,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             }
 
             List<IdentityResource> results = new List<IdentityResource>();
-            entities.ToList().ForEach(entity =>
+            foreach (var entity in entities)
             {
                 IdentityResource identityResource = new IdentityResource
                 {
@@ -120,7 +118,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 };
 
                 results.Add(identityResource);
-            });
+            }
 
             return results;
         }
@@ -133,7 +131,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             List<ApiResource> apiResourceResults = new List<ApiResource>();
             List<IdentityResource> identityResourceResults = new List<IdentityResource>();
 
-            apiResourceEntities.ToList().ForEach(entity =>
+            foreach (var entity in apiResourceEntities)
             {
                 ApiResource apiResource = new ApiResource
                 {
@@ -159,13 +157,13 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                         ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
                         //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                     }).ToList(),
-                   // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                    // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
                 };
 
                 apiResourceResults.Add(apiResource);
-            });
+            }
 
-            identityResourceEntities.ToList().ForEach(entity =>
+            foreach (var entity in identityResourceEntities)
             {
                 IdentityResource identityResource = new IdentityResource
                 {
@@ -178,7 +176,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 };
 
                 identityResourceResults.Add(identityResource);
-            });
+            }
 
             return new Resources(identityResourceResults, apiResourceResults);
         }

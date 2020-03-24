@@ -2,6 +2,7 @@
 using Jeans.IdentityServer4.Server.Configuration;
 using Jeans.IdentityServer4.Server.Data;
 using Jeans.IdentityServer4.Server.Extensions;
+using Jeans.IdentityServer4.Server.StoreImp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,12 +36,10 @@ namespace Jeans.IdentityServer4.Server
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
                     .AddTestUsers(MemoryConfig.GetTestUsers())
-                    .AddInMemoryApiResources(MemoryConfig.GetApiResources())
-                    .AddInMemoryClients(MemoryConfig.GetClients());
-
-            /*
-                    .AddClientStore<JeansClientStore>()
                     .AddResourceStore<JeansResourceStore>()
+                    .AddClientStore<JeansClientStore>();
+
+            /*                                      
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
                     .AddProfileService<JeansProfileService>();
                     */

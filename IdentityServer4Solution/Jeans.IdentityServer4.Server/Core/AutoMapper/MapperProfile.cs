@@ -7,6 +7,11 @@ namespace Jeans.IdentityServer4.Server.Core.AutoMapper
     {
         public MapperProfile()
         {
+            EntityToModel();
+        }
+
+        private void EntityToModel()
+        {
             CreateMap<Entity.Client, Client>();
         }
     }

@@ -23,18 +23,18 @@ namespace Jeans.IdentityServer4.Server.Service
 
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
-            var query = _apiResourceRepository.TableNoTracking.Where(w => w.Name == name && w.Enabled);
+            var query = _apiResourceRepository.Table.Where(w => w.Name == name);
 
             return await query
                                         .Include(x => x.ApiSecrets)
                                         .Include(x => x.ApiScopes)
-                                          //  .ThenInclude(x => x.ApiScopeClaims)
+                                        //  .ThenInclude(x => x.ApiScopeClaims)
                                         .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var query = _apiResourceRepository.TableNoTracking.Where(w => scopeNames.Contains(w.Name));
+            var query = _apiResourceRepository.Table.Where(w => w.ApiScopes.Any(a => scopeNames.Contains(a.Name)));
             var results = await query
                                        .Include(x => x.ApiSecrets)
                                        .Include(x => x.ApiScopes)
@@ -44,15 +44,14 @@ namespace Jeans.IdentityServer4.Server.Service
 
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var query = _identityResourceRepository.TableNoTracking.Where(w => scopeNames.Contains(w.Name));
-            var results = await query
-                                                .ToListAsync();
+            var query = _identityResourceRepository.Table.Where(w => scopeNames.Contains(w.Name));
+            var results = await query.ToListAsync();
             return results;
         }
 
         public async Task<IEnumerable<ApiResource>> GetAllApiResourceAsync()
         {
-            return await _apiResourceRepository.TableNoTracking
+            return await _apiResourceRepository.Table
                                                                     .Include(x => x.ApiSecrets)
                                                                     .Include(x => x.ApiScopes)
                                                                     .ToListAsync();
@@ -60,8 +59,7 @@ namespace Jeans.IdentityServer4.Server.Service
 
         public async Task<IEnumerable<IdentityResource>> GetAllIdentityResourceAsync()
         {
-            return await _identityResourceRepository.TableNoTracking
-                                                                           .ToListAsync();
+            return await _identityResourceRepository.Table.ToListAsync();
         }
     }
 }
