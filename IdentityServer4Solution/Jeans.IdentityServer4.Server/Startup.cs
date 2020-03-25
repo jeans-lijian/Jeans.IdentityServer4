@@ -39,7 +39,7 @@ namespace Jeans.IdentityServer4.Server
                     .AddResourceStore<JeansResourceStore>()
                     .AddClientStore<JeansClientStore>();
 
-            /*                                      
+            /*
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
                     .AddProfileService<JeansProfileService>();
                     */

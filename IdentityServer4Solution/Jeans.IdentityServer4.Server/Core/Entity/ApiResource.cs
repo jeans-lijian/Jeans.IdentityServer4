@@ -21,6 +21,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         //public List<ApiResourceProperty> ApiResourceProperties { get; set; }
         //public List<ApiResourceClaim> ApiResourceClaims { get; set; }
         public List<ApiScope> ApiScopes { get; set; }
+
         public List<ApiSecret> ApiSecrets { get; set; }
     }
 }

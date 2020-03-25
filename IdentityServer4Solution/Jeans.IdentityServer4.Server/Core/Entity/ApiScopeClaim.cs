@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Jeans.IdentityServer4.Server.Core.Entity
+﻿namespace Jeans.IdentityServer4.Server.Core.Entity
 {
     /// <summary>
     /// Api作用域，声明

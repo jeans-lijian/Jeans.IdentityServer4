@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {

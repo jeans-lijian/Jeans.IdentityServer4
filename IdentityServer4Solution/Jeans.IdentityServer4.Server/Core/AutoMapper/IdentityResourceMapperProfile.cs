@@ -3,16 +3,16 @@ using IdentityServer4.Models;
 
 namespace Jeans.IdentityServer4.Server.Core.AutoMapper
 {
-    public class MapperProfile : Profile
+    public class IdentityResourceMapperProfile : Profile
     {
-        public MapperProfile()
+        public IdentityResourceMapperProfile()
         {
             EntityToModel();
         }
 
         private void EntityToModel()
         {
-            CreateMap<Entity.Client, Client>();
+            CreateMap<Entity.IdentityResource, IdentityResource>();
         }
     }
 }

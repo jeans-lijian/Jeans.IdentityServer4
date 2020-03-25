@@ -33,7 +33,7 @@ namespace Jeans.IdentityServer4.Server.Data
         public IQueryable<TEntity> Table => Entities;
         public IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        public async Task<TEntity> GetById(object key) =>await  Entities.FindAsync(key);
+        public async Task<TEntity> GetById(object key) => await Entities.FindAsync(key);
 
         public async Task Insert(TEntity entity)
         {

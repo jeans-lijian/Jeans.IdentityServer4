@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Stores;
+using Jeans.IdentityServer4.Server.Core.AutoMapper;
 using Jeans.IdentityServer4.Server.Service;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,25 +20,46 @@ namespace Jeans.IdentityServer4.Server.StoreImp
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
             Core.Entity.ApiResource entity = await _resourceService.FindApiResourceAsync(name);
-            if (entity == null)
-            {
-                return new ApiResource();
-            }
 
-            ApiResource apiResource = new ApiResource
+            ApiResource apiResource = entity.ToModel();
+            apiResource.ApiSecrets = entity.ApiSecrets.Select(s => new Secret
             {
-                Name = entity.Name,
-                Enabled = entity.Enabled,
-                DisplayName = entity.DisplayName,
-                Description = entity.Description,
-                ApiSecrets = entity.ApiSecrets.Select(s => new Secret
+                Type = s.Type,
+                Value = s.Value.Sha256(),
+                Description = s.Description,
+                Expiration = s.Expiration
+            }).ToList();
+            apiResource.Scopes = entity.ApiScopes.Select(s => new Scope
+            {
+                Name = s.Name,
+                DisplayName = s.DisplayName,
+                Description = s.Description,
+                Required = s.Required,
+                Emphasize = s.Emphasize,
+                ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
+                //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+            }).ToList();
+            //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+
+            return apiResource;
+        }
+
+        public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
+        {
+            IEnumerable<Core.Entity.ApiResource> entities = await _resourceService.FindApiResourcesByScopeAsync(scopeNames);
+
+            List<ApiResource> results = new List<ApiResource>();
+            foreach (var entity in entities)
+            {
+                ApiResource apiResource = entity.ToModel();
+                apiResource.ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                 {
                     Type = s.Type,
-                    Value = s.Value.Sha256(),
+                    Value = s.Value,
                     Description = s.Description,
                     Expiration = s.Expiration
-                }).ToList(),
-                Scopes = entity.ApiScopes.Select(s => new Scope
+                }).ToList();
+                apiResource.Scopes = entity.ApiScopes.Select(s => new Scope
                 {
                     Name = s.Name,
                     DisplayName = s.DisplayName,
@@ -46,49 +68,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Emphasize = s.Emphasize,
                     ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
                     //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
-                }).ToList(),
+                }).ToList();
                 //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
-            };
-
-            return apiResource;
-        }
-
-        public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
-        {
-            IEnumerable<Core.Entity.ApiResource> entities = await _resourceService.FindApiResourcesByScopeAsync(scopeNames);
-            if (entities == null || !entities.Any())
-            {
-                return new List<ApiResource>();
-            }
-
-            List<ApiResource> results = new List<ApiResource>();
-            foreach (var entity in entities)
-            {
-                ApiResource apiResource = new ApiResource
-                {
-                    Name = entity.Name,
-                    Enabled = entity.Enabled,
-                    DisplayName = entity.DisplayName,
-                    Description = entity.Description,
-                    ApiSecrets = entity.ApiSecrets.Select(s => new Secret
-                    {
-                        Type = s.Type,
-                        Value = s.Value,
-                        Description = s.Description,
-                        Expiration = s.Expiration
-                    }).ToList(),
-                    Scopes = entity.ApiScopes.Select(s => new Scope
-                    {
-                        Name = s.Name,
-                        DisplayName = s.DisplayName,
-                        Description = s.Description,
-                        Required = s.Required,
-                        Emphasize = s.Emphasize,
-                        ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                        //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
-                    }).ToList(),
-                    //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
-                };
 
                 results.Add(apiResource);
             }
@@ -99,28 +80,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
             IEnumerable<Core.Entity.IdentityResource> entities = await _resourceService.FindIdentityResourcesByScopeAsync(scopeNames);
-            if (entities == null || !entities.Any())
-            {
-                return new List<IdentityResource>();
-            }
 
-            List<IdentityResource> results = new List<IdentityResource>();
-            foreach (var entity in entities)
-            {
-                IdentityResource identityResource = new IdentityResource
-                {
-                    Name = entity.Name,
-                    Enabled = entity.Enabled,
-                    DisplayName = entity.DisplayName,
-                    Description = entity.Description,
-                    //Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
-                    //UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
-                };
-
-                results.Add(identityResource);
-            }
-
-            return results;
+            return entities.Select(x => x.ToModel()).ToList();
         }
 
         public async Task<Resources> GetAllResourcesAsync()
@@ -129,54 +90,34 @@ namespace Jeans.IdentityServer4.Server.StoreImp
             IEnumerable<Core.Entity.IdentityResource> identityResourceEntities = await _resourceService.GetAllIdentityResourceAsync();
 
             List<ApiResource> apiResourceResults = new List<ApiResource>();
-            List<IdentityResource> identityResourceResults = new List<IdentityResource>();
 
             foreach (var entity in apiResourceEntities)
             {
-                ApiResource apiResource = new ApiResource
+                ApiResource apiResource = entity.ToModel();
+
+                apiResource.ApiSecrets = entity.ApiSecrets.Select(s => new Secret
                 {
-                    Name = entity.Name,
-                    Enabled = entity.Enabled,
-                    DisplayName = entity.DisplayName,
-                    Description = entity.Description,
-                    //Properties = entity.ApiResourceProperties.ToDictionary(k => k.Key, v => v.Value),
-                    ApiSecrets = entity.ApiSecrets.Select(s => new Secret
-                    {
-                        Type = s.Type,
-                        Value = s.Value,
-                        Description = s.Description,
-                        Expiration = s.Expiration
-                    }).ToList(),
-                    Scopes = entity.ApiScopes.Select(s => new Scope
-                    {
-                        Name = s.Name,
-                        DisplayName = s.DisplayName,
-                        Description = s.Description,
-                        Required = s.Required,
-                        Emphasize = s.Emphasize,
-                        ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                        //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
-                    }).ToList(),
-                    // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
-                };
+                    Type = s.Type,
+                    Value = s.Value,
+                    Description = s.Description,
+                    Expiration = s.Expiration
+                }).ToList();
+                apiResource.Scopes = entity.ApiScopes.Select(s => new Scope
+                {
+                    Name = s.Name,
+                    DisplayName = s.DisplayName,
+                    Description = s.Description,
+                    Required = s.Required,
+                    Emphasize = s.Emphasize,
+                    ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
+                    //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                }).ToList();
+                // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
 
                 apiResourceResults.Add(apiResource);
             }
 
-            foreach (var entity in identityResourceEntities)
-            {
-                IdentityResource identityResource = new IdentityResource
-                {
-                    Name = entity.Name,
-                    Enabled = entity.Enabled,
-                    DisplayName = entity.DisplayName,
-                    Description = entity.Description,
-                    //Properties = entity.IdentityResourceProperties.ToDictionary(k => k.Key, v => v.Value),
-                    //UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList()
-                };
-
-                identityResourceResults.Add(identityResource);
-            }
+            List<IdentityResource> identityResourceResults = identityResourceEntities.Select(x => x.ToModel()).ToList();
 
             return new Resources(identityResourceResults, apiResourceResults);
         }

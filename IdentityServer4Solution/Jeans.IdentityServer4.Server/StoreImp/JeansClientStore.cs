@@ -2,7 +2,6 @@
 using IdentityServer4.Stores;
 using Jeans.IdentityServer4.Server.Service;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.StoreImp

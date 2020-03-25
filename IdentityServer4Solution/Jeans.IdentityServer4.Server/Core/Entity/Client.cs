@@ -55,9 +55,11 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         //public List<ClientClaim> ClientClaims { get; set; }
         //public List<ClientCorsOrigin> ClientCorsOrigins { get; set; }
         public List<ClientGrantType> ClientGrantTypes { get; set; }
+
         //public List<ClientProperty> ClientProperties { get; set; }
         //public List<ClientRedirectUri> ClientRedirectUris { get; set; }
         public List<ClientScope> ClientScopes { get; set; }
+
         public List<ClientSecret> ClientSecrets { get; set; }
         //public List<ClientIdPRestriction> ClientIdPRestrictions { get; set; }
         //public List<ClientPostLogoutRedirectUri> ClientPostLogoutRedirectUris { get; set; }

@@ -1,16 +1,20 @@
-﻿using IdentityServer4.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using IdentityServer4.Models;
 
 namespace Jeans.IdentityServer4.Server.Core.AutoMapper
 {
     public static class IdentityResourceMapper
     {
+        private static IMapper Mapper { get; }
+
+        static IdentityResourceMapper()
+        {
+            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<IdentityResourceMapperProfile>()).CreateMapper();
+        }
+
         public static IdentityResource ToModel(this Entity.IdentityResource entity)
         {
-            return null;
+            return entity == null ? null : Mapper.Map<IdentityResource>(entity);
         }
     }
 }

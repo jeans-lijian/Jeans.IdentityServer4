@@ -26,11 +26,11 @@ namespace Jeans.IdentityServer4.Server.Service
                                                           .Include(x => x.ClientGrantTypes)
                                                           .Include(x => x.ClientScopes)
                                                           .Include(x => x.ClientSecrets)
-                                                         // .Include(x => x.ClientPostLogoutRedirectUris)
-                                                         // .Include(x => x.ClientProperties)
-                                                         // .Include(x => x.ClientRedirectUris)
-                                                         // .Include(x => x.ClientCorsOrigins)
-                                                         // .Include(x => x.ClientIdPRestrictions)
+                                                          // .Include(x => x.ClientPostLogoutRedirectUris)
+                                                          // .Include(x => x.ClientProperties)
+                                                          // .Include(x => x.ClientRedirectUris)
+                                                          // .Include(x => x.ClientCorsOrigins)
+                                                          // .Include(x => x.ClientIdPRestrictions)
                                                           .FirstOrDefaultAsync(w => w.ClientId == clientId && w.Enabled);
         }
     }

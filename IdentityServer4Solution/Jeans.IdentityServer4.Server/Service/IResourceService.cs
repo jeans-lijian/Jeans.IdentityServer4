@@ -10,9 +10,9 @@ namespace Jeans.IdentityServer4.Server.Service
 
         Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames);
 
-        Task<IEnumerable<ApiResource>> GetAllApiResourceAsync();
-
         Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames);
+
+        Task<IEnumerable<ApiResource>> GetAllApiResourceAsync();
 
         Task<IEnumerable<IdentityResource>> GetAllIdentityResourceAsync();
     }
