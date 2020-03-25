@@ -1,7 +1,10 @@
-﻿using Jeans.IdentityServer4.Server.Core;
+﻿using System.Linq;
+using System.Reflection;
+using Jeans.IdentityServer4.Server.Core;
 using Jeans.IdentityServer4.Server.Core.Entity;
 using Jeans.IdentityServer4.Server.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Jeans.IdentityServer4.Server.Data {
     public class IdentityServerDbContext : DbContext, IDbContext {
@@ -29,6 +32,19 @@ namespace Jeans.IdentityServer4.Server.Data {
             //modelBuilder.ApplyConfiguration(new IdentityClaimMap());
             //modelBuilder.ApplyConfiguration(new PersistedGrantMap());
             //modelBuilder.ApplyConfiguration(new DeviceFlowCodeMap());
+
+/*
+            var typesToRegister = Assembly.GetExecutingAssembly ().GetTypes ()
+                .Where (type => !string.IsNullOrWhiteSpace (type.Namespace))
+                .Where (type => type.BaseType != null &&
+                    type.BaseType.IsGenericType &&
+                    type.BaseType.GetGenericTypeDefinition () == typeof (IEntityTypeConfiguration<>));
+            foreach (var item in typesToRegister)
+            {
+                dynamic dynamic=Activator.CreateInstance(item);
+                modelBuilder.ApplyConfiguration(dynamic);
+            }
+            */
 
             base.OnModelCreating (modelBuilder);
         }
