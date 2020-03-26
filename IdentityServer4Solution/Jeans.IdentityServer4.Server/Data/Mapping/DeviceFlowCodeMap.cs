@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Jeans.IdentityServer4.Server.Data.Mapping
 {
-    public class DeviceFlowCodeMap : IEntityTypeConfiguration<DeviceFlowCode>
+    public class DeviceFlowCodeMap //: IEntityTypeConfiguration<DeviceFlowCode>
     {
         public void Configure(EntityTypeBuilder<DeviceFlowCode> builder)
         {

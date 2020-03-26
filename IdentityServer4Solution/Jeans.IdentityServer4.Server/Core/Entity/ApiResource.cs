@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jeans.IdentityServer4.Server.Core.Entity {
+namespace Jeans.IdentityServer4.Server.Core.Entity
+{
     /// <summary>
     /// Api资源
     /// </summary>
-    public class ApiResource : BaseEntity {
+    public class ApiResource : BaseEntity
+    {
         public bool Enabled { get; set; } = true;
         public string Name { get; set; }
         public string DisplayName { get; set; }
@@ -19,7 +21,6 @@ namespace Jeans.IdentityServer4.Server.Core.Entity {
         public List<ApiResourceProperty> ApiResourceProperties { get; set; }
         public List<ApiResourceClaim> ApiResourceClaims { get; set; }
         public List<ApiScope> ApiScopes { get; set; }
-
         public List<ApiSecret> ApiSecrets { get; set; }
     }
 }

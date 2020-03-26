@@ -37,9 +37,10 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                 Required = s.Required,
                 Emphasize = s.Emphasize,
                 ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
             }).ToList();
-            //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+            apiResource.UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList();
+            apiResource.Properties = entity.ApiResourceProperties.ToDictionary(p => p.Key, p => p.Value);
 
             return apiResource;
         }
@@ -67,9 +68,10 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Required = s.Required,
                     Emphasize = s.Emphasize,
                     ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                    //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                    UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                 }).ToList();
-                //UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                apiResource.UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList();
+                apiResource.Properties = entity.ApiResourceProperties.ToDictionary(p => p.Key, p => p.Value);
 
                 results.Add(apiResource);
             }
@@ -81,7 +83,17 @@ namespace Jeans.IdentityServer4.Server.StoreImp
         {
             IEnumerable<Core.Entity.IdentityResource> entities = await _resourceService.FindIdentityResourcesByScopeAsync(scopeNames);
 
-            return entities.Select(x => x.ToModel()).ToList();
+            List<IdentityResource> results = new List<IdentityResource>();
+            foreach (var entity in entities)
+            {
+                IdentityResource identityResource = entity.ToModel();
+                identityResource.UserClaims = entity.IdentityClaims.Select(s => s.Type).ToList();
+                identityResource.Properties = entity.IdentityResourceProperties.ToDictionary(p => p.Key, p => p.Value);
+
+                results.Add(identityResource);
+            }
+
+            return results;
         }
 
         public async Task<Resources> GetAllResourcesAsync()
@@ -110,9 +122,10 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Required = s.Required,
                     Emphasize = s.Emphasize,
                     ShowInDiscoveryDocument = s.ShowInDiscoveryDocument,
-                    //UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
+                    UserClaims = s.ApiScopeClaims.Select(sc => sc.Type).ToList()
                 }).ToList();
-                // UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList()
+                apiResource.UserClaims = entity.ApiResourceClaims.Select(s => s.Type).ToList();
+                apiResource.Properties = entity.ApiResourceProperties.ToDictionary(p => p.Key, p => p.Value);
 
                 apiResourceResults.Add(apiResource);
             }

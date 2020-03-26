@@ -8,6 +8,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ApiResourceProperty> builder)
         {
+            builder.ToTable("apiresourceproperties");
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Key).HasMaxLength(250).IsRequired();
             builder.Property(p => p.Value).HasMaxLength(2000).IsRequired();

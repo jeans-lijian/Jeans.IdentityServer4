@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Jeans.IdentityServer4.Server.Data.Mapping
 {
-    public class PersistedGrantMap : IEntityTypeConfiguration<PersistedGrant>
+    public class PersistedGrantMap //: IEntityTypeConfiguration<PersistedGrant>
     {
         public void Configure(EntityTypeBuilder<PersistedGrant> builder)
         {

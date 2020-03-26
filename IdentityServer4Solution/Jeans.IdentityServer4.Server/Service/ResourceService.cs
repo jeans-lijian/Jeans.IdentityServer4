@@ -25,19 +25,22 @@ namespace Jeans.IdentityServer4.Server.Service
         {
             var query = _apiResourceRepository.Table.Where(w => w.Name == name);
 
-            return await query
+            return await query.Include(x => x.ApiResourceClaims)
+                                        .Include(x => x.ApiResourceProperties)
                                         .Include(x => x.ApiSecrets)
                                         .Include(x => x.ApiScopes)
-                                        //  .ThenInclude(x => x.ApiScopeClaims)
+                                          .ThenInclude(x => x.ApiScopeClaims)
                                         .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
             var query = _apiResourceRepository.Table.Where(w => w.ApiScopes.Any(a => scopeNames.Contains(a.Name)));
-            var results = await query
+            var results = await query.Include(x => x.ApiResourceClaims)
+                                        .Include(x => x.ApiResourceProperties)
                                        .Include(x => x.ApiSecrets)
                                        .Include(x => x.ApiScopes)
+                                            .ThenInclude(x => x.ApiScopeClaims)
                                        .ToListAsync();
             return results;
         }
@@ -45,21 +48,24 @@ namespace Jeans.IdentityServer4.Server.Service
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
             var query = _identityResourceRepository.Table.Where(w => scopeNames.Contains(w.Name));
-            var results = await query.ToListAsync();
+            var results = await query.Include(x => x.IdentityClaims).Include(x => x.IdentityResourceProperties).ToListAsync();
             return results;
         }
 
         public async Task<IEnumerable<ApiResource>> GetAllApiResourceAsync()
         {
-            return await _apiResourceRepository.Table
+            return await _apiResourceRepository.Table.Include(x => x.ApiResourceClaims)
+                                                                    .Include(x => x.ApiResourceProperties)
                                                                     .Include(x => x.ApiSecrets)
                                                                     .Include(x => x.ApiScopes)
+                                                                        .ThenInclude(x => x.ApiScopeClaims)
                                                                     .ToListAsync();
         }
 
         public async Task<IEnumerable<IdentityResource>> GetAllIdentityResourceAsync()
         {
-            return await _identityResourceRepository.Table.ToListAsync();
+            return await _identityResourceRepository.Table
+                            .Include(x => x.IdentityClaims).Include(x => x.IdentityResourceProperties).ToListAsync();
         }
     }
 }

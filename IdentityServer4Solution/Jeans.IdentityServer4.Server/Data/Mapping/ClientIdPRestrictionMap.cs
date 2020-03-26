@@ -8,6 +8,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ClientIdPRestriction> builder)
         {
+            builder.ToTable("clientidprestrictions");
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Provider).HasMaxLength(200).IsRequired();
         }

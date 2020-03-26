@@ -2,6 +2,7 @@
 using IdentityServer4.Stores;
 using Jeans.IdentityServer4.Server.Service;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.StoreImp
@@ -70,13 +71,13 @@ namespace Jeans.IdentityServer4.Server.StoreImp
                     Description = s.Description
                 }).ToList(),
                 AllowedScopes = entity.ClientScopes.Select(s => s.Scope).ToList(),
-                //Claims = entity.ClientClaims.Select(s => new Claim(s.Type, s.Value)).ToList(),
-                //IdentityProviderRestrictions = entity.ClientIdPRestrictions.Select(s => s.Provider).ToList(),
-                //Properties = entity.ClientProperties.ToDictionary(k => k.Key, v => v.Value),
-                //PostLogoutRedirectUris = entity.ClientPostLogoutRedirectUris.Select(s => s.PostLogoutRedirectUri).ToList(),
-                //RedirectUris = entity.ClientRedirectUris.Select(s => s.RedirectUri).ToList(),
+                Claims = entity.ClientClaims.Select(s => new Claim(s.Type, s.Value)).ToList(),
+                IdentityProviderRestrictions = entity.ClientIdPRestrictions.Select(s => s.Provider).ToList(),
+                Properties = entity.ClientProperties.ToDictionary(k => k.Key, v => v.Value),
+                PostLogoutRedirectUris = entity.ClientPostLogoutRedirectUris.Select(s => s.PostLogoutRedirectUri).ToList(),
+                RedirectUris = entity.ClientRedirectUris.Select(s => s.RedirectUri).ToList(),
                 AllowedGrantTypes = entity.ClientGrantTypes.Select(s => s.GrantType).ToList(),
-                //AllowedCorsOrigins = entity.ClientCorsOrigins.Select(s => s.Origin).ToList()
+                AllowedCorsOrigins = entity.ClientCorsOrigins.Select(s => s.Origin).ToList()
             };
 
             return client;

@@ -8,6 +8,7 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ClientPostLogoutRedirectUri> builder)
         {
+            builder.ToTable("clientpostlogoutredirecturis");
             builder.HasKey(k => k.Id);
             builder.Property(p => p.PostLogoutRedirectUri).HasMaxLength(2000).IsRequired();
         }

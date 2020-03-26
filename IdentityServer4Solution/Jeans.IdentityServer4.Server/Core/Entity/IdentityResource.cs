@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Jeans.IdentityServer4.Server.Core.Entity
 {
@@ -18,7 +19,7 @@ namespace Jeans.IdentityServer4.Server.Core.Entity
         public DateTime? Updated { get; set; }
         public bool NonEditable { get; set; }
 
-        //public List<IdentityResourceProperty> IdentityResourceProperties { get; set; }
-        //public List<IdentityClaim> IdentityClaims { get; set; }
+        public List<IdentityResourceProperty> IdentityResourceProperties { get; set; }
+        public List<IdentityClaim> IdentityClaims { get; set; }
     }
 }
