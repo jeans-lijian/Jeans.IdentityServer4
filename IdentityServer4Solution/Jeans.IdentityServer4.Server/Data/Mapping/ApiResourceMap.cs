@@ -15,8 +15,8 @@ namespace Jeans.IdentityServer4.Server.Data.Mapping
             builder.Property(p => p.Description).HasMaxLength(1000);
             builder.Property(p => p.AllowedAccessTokenSigningAlgorithms).HasMaxLength(100);
 
-            //builder.HasMany(m => m.ApiResourceClaims).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
-            //builder.HasMany(m => m.ApiResourceProperties).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ApiResourceClaims).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(m => m.ApiResourceProperties).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
             builder.HasMany(m => m.ApiScopes).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
             builder.HasMany(m => m.ApiSecrets).WithOne(o => o.ApiResource).HasForeignKey(fk => fk.ApiResourceId).OnDelete(DeleteBehavior.Cascade);
         }

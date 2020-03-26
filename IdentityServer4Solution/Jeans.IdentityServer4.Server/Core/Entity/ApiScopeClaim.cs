@@ -1,4 +1,6 @@
-﻿namespace Jeans.IdentityServer4.Server.Core.Entity
+﻿using System;
+
+namespace Jeans.IdentityServer4.Server.Core.Entity
 {
     /// <summary>
     /// Api作用域，声明
@@ -7,7 +9,7 @@
     {
         public string Type { get; set; }
 
-        //public Guid ApiScopeId { get; set; }
-        //public ApiScope ApiScope { get; set; }
+        public Guid ApiScopeId { get; set; }
+        public ApiScope ApiScope { get; set; }
     }
 }
