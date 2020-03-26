@@ -39,7 +39,6 @@ namespace Jeans.IdentityServer4.UI.Data
             base.OnModelCreating(modelBuilder);
         }
 
-
         public DbSet<ApiResource> ApiResources { get; set; }
         public DbSet<ApiResourceClaim> ApiResourceClaims { get; set; }
         public DbSet<ApiResourceProperty> ApiResourceProperties { get; set; }
@@ -62,9 +61,8 @@ namespace Jeans.IdentityServer4.UI.Data
         public DbSet<IdentityResourceProperty> IdentityResourceProperties { get; set; }
         public DbSet<IdentityClaim> IdentityClaims { get; set; }
 
-        public DbSet<PersistedGrant> PersistedGrants { get; set; }
-        public DbSet<DeviceFlowCode> DeviceFlowCodes { get; set; }
-
+        //public DbSet<PersistedGrant> PersistedGrants { get; set; }
+        //public DbSet<DeviceFlowCode> DeviceFlowCodes { get; set; }
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {

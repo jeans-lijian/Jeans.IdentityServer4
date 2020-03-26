@@ -8,11 +8,11 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
     /// <summary>
     /// 客户端限制
     /// </summary>
-    public class ClientIdPRestriction: BaseEntity
+    public class ClientIdPRestriction : BaseEntity
     {
         public string Provider { get; set; }
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
         public Client Client { get; set; }
     }
 }

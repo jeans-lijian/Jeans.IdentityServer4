@@ -18,7 +18,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
         public bool ShowInDiscoveryDocument { get; set; } = true;
         public List<ApiScopeClaim> ApiScopeClaims { get; set; }
 
-        public int ApiResourceId { get; set; }
+        public Guid ApiResourceId { get; set; }
         public ApiResource ApiResource { get; set; }
     }
 }

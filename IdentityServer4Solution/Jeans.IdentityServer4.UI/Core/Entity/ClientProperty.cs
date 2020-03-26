@@ -13,7 +13,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
         public string Key { get; set; }
         public string Value { get; set; }
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
         public Client Client { get; set; }
     }
 }

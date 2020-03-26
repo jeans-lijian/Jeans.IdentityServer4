@@ -13,6 +13,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
     public class ApiResourceController : Controller
     {
         private readonly IRepository<ApiResource> _apiResourceRepository;
+
         public ApiResourceController(IRepository<ApiResource> apiResourceRepository)
         {
             _apiResourceRepository = apiResourceRepository;
@@ -39,7 +40,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return RedirectToAction("List");
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var entity = await _apiResourceRepository.TableNoTracking.FirstOrDefaultAsync(w => w.Id == id);
 

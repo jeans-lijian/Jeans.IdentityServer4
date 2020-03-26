@@ -16,7 +16,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
         public string Type { get; set; } = "SharedSecret";
         public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public int ApiResourceId { get; set; }
+        public Guid ApiResourceId { get; set; }
         public ApiResource ApiResource { get; set; }
     }
 }

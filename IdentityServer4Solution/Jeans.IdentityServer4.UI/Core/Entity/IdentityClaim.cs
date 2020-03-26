@@ -12,7 +12,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
     {
         public string Type { get; set; }
 
-        public int IdentityResourceId { get; set; }
+        public Guid IdentityResourceId { get; set; }
         public IdentityResource IdentityResource { get; set; }
     }
 }

@@ -45,13 +45,13 @@ namespace Jeans.IdentityServer4.UI
 
             services.AddDbContext<IdentityServerDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("identityserver"));
+                options.UseMySql(Configuration.GetConnectionString("identityserver"));
             });
-            services.AddDbContext<ObjectDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("identity"));
-            });
-                 
+            //services.AddDbContext<ObjectDbContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("identity"));
+            //});
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var builder = new ContainerBuilder();

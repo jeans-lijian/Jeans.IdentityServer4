@@ -18,6 +18,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
     public class ClientController : Controller
     {
         private readonly IRepository<Client> _repository;
+
         public ClientController(IRepository<Client> repository)
         {
             _repository = repository;
@@ -29,7 +30,6 @@ namespace Jeans.IdentityServer4.UI.Controllers
 
             return View(results);
         }
-
 
         public IActionResult Add()
         {
@@ -46,8 +46,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return RedirectToAction("List");
         }
 
-
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             var entity = _repository.GetById(id);
             if (entity == null)
@@ -68,7 +67,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return RedirectToAction("List");
         }
 
-        public async Task<IActionResult> Show(int id)
+        public async Task<IActionResult> Show(Guid id)
         {
             var entity = await _repository.TableNoTracking.Include(x => x.ClientGrantTypes)
                 .Include(x => x.ClientSecrets)
@@ -77,7 +76,7 @@ namespace Jeans.IdentityServer4.UI.Controllers
             return View(entity);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             var entity = _repository.GetById(id);
             if (entity != null)

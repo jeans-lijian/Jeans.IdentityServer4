@@ -12,7 +12,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
     {
         public string Type { get; set; }
 
-        public int ApiScopeId { get; set; }
+        public Guid ApiScopeId { get; set; }
         public ApiScope ApiScope { get; set; }
     }
 }

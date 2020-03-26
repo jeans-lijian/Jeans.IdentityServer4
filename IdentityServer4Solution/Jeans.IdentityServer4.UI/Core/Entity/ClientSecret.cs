@@ -8,7 +8,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
     /// <summary>
     /// 客户秘钥
     /// </summary>
-    public class ClientSecret: BaseEntity
+    public class ClientSecret : BaseEntity
     {
         public string Description { get; set; }
         public string Value { get; set; }
@@ -16,7 +16,7 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
         public string Type { get; set; } = "SharedSecret";
         public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
         public Client Client { get; set; }
     }
 }

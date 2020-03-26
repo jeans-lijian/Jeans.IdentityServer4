@@ -8,11 +8,11 @@ namespace Jeans.IdentityServer4.UI.Core.Entity
     /// <summary>
     /// 客户重定向Uri
     /// </summary>
-    public class ClientRedirectUri: BaseEntity
+    public class ClientRedirectUri : BaseEntity
     {
         public string RedirectUri { get; set; }
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
         public Client Client { get; set; }
     }
 }
