@@ -13,7 +13,7 @@ namespace LJ.Ids4.Core.Domain.Resources
         public string Type { get; set; } = "SharedSecret";
         public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public Guid ApiResourceId { get; set; }
+        public int ApiResourceId { get; set; }
         public ApiResource ApiResource { get; set; }
     }
 }

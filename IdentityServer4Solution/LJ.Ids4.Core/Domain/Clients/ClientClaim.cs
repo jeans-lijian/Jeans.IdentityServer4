@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LJ.Ids4.Core.Domain.Clients
+﻿namespace LJ.Ids4.Core.Domain.Clients
 {
     /// <summary>
     /// 客户声明
@@ -10,7 +8,7 @@ namespace LJ.Ids4.Core.Domain.Clients
         public string Type { get; set; }
         public string Value { get; set; }
 
-        public Guid ClientId { get; set; }
+        public int ClientId { get; set; }
         public Client Client { get; set; }
     }
 }

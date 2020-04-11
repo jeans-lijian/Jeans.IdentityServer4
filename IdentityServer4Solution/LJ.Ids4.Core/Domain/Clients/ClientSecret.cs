@@ -13,7 +13,7 @@ namespace LJ.Ids4.Core.Domain.Clients
         public string Type { get; set; } = "SharedSecret";
         public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public Guid ClientId { get; set; }
+        public int ClientId { get; set; }
         public Client Client { get; set; }
     }
 }

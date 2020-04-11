@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LJ.Ids4.Core.Domain.Resources
 {
@@ -16,7 +15,7 @@ namespace LJ.Ids4.Core.Domain.Resources
         public bool ShowInDiscoveryDocument { get; set; } = true;
         public List<ApiScopeClaim> ApiScopeClaims { get; set; }
 
-        public Guid ApiResourceId { get; set; }
+        public int ApiResourceId { get; set; }
         public ApiResource ApiResource { get; set; }
     }
 }

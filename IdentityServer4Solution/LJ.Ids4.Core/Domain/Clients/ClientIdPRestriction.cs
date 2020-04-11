@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LJ.Ids4.Core.Domain.Clients
+﻿namespace LJ.Ids4.Core.Domain.Clients
 {
     /// <summary>
     /// 客户端限制
@@ -9,7 +7,7 @@ namespace LJ.Ids4.Core.Domain.Clients
     {
         public string Provider { get; set; }
 
-        public Guid ClientId { get; set; }
+        public int ClientId { get; set; }
         public Client Client { get; set; }
     }
 }
