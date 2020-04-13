@@ -25,7 +25,6 @@ namespace Jeans.IdentityServer4.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Ids4DbContext>(options => options.UseMySql(Configuration.GetConnectionString("Ids4Conn")));
-            //services.AddDbContext<ObjectDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("identity")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
