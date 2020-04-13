@@ -1,12 +1,12 @@
-﻿using Jeans.IdentityServer4.Server.Core.Entity;
-using Jeans.IdentityServer4.Server.Data;
+﻿using LJ.Ids4.Core.Domain.Resources;
+using LJ.Ids4.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jeans.IdentityServer4.Server.Service
+namespace LJ.Ids4.Service.Resources
 {
     public class ResourceService : IResourceService
     {
@@ -20,6 +20,8 @@ namespace Jeans.IdentityServer4.Server.Service
             _apiResourceRepository = apiResourceRepository;
             _identityResourceRepository = identityResourceRepository;
         }
+
+        #region 服务器
 
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
@@ -67,5 +69,7 @@ namespace Jeans.IdentityServer4.Server.Service
             return await _identityResourceRepository.Table
                             .Include(x => x.IdentityClaims).Include(x => x.IdentityResourceProperties).ToListAsync();
         }
+
+        #endregion 服务器
     }
 }

@@ -12,7 +12,7 @@ namespace Jeans.IdentityServer4.Server.Core.AutoMapper
 
         private void EntityToModel()
         {
-            CreateMap<Entity.ApiResource, ApiResource>();
+            CreateMap<LJ.Ids4.Core.Domain.Resources.ApiResource, ApiResource>();
         }
     }
 }

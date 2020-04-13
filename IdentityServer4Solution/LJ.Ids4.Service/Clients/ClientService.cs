@@ -1,9 +1,9 @@
-﻿using Jeans.IdentityServer4.Server.Core.Entity;
-using Jeans.IdentityServer4.Server.Data;
+﻿using LJ.Ids4.Core.Domain.Clients;
+using LJ.Ids4.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Jeans.IdentityServer4.Server.Service
+namespace LJ.Ids4.Service.Clients
 {
     public class ClientService : IClientService
     {
@@ -13,6 +13,8 @@ namespace Jeans.IdentityServer4.Server.Service
         {
             _clientRepository = clientRepository;
         }
+
+        #region 服务器
 
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
@@ -33,5 +35,7 @@ namespace Jeans.IdentityServer4.Server.Service
                                                           .Include(x => x.ClientIdPRestrictions)
                                                           .FirstOrDefaultAsync(w => w.ClientId == clientId && w.Enabled);
         }
+
+        #endregion 服务器
     }
 }

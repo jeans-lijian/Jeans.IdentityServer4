@@ -1,7 +1,7 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Jeans.IdentityServer4.Server.Core.AutoMapper;
-using Jeans.IdentityServer4.Server.Service;
+using LJ.Ids4.Service.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
-            Core.Entity.ApiResource entity = await _resourceService.FindApiResourceAsync(name);
+            var entity = await _resourceService.FindApiResourceAsync(name);
 
             ApiResource apiResource = entity.ToModel();
             apiResource.ApiSecrets = entity.ApiSecrets.Select(s => new Secret
@@ -47,7 +47,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            IEnumerable<Core.Entity.ApiResource> entities = await _resourceService.FindApiResourcesByScopeAsync(scopeNames);
+            IEnumerable<LJ.Ids4.Core.Domain.Resources.ApiResource> entities = await _resourceService.FindApiResourcesByScopeAsync(scopeNames);
 
             List<ApiResource> results = new List<ApiResource>();
             foreach (var entity in entities)
@@ -81,7 +81,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            IEnumerable<Core.Entity.IdentityResource> entities = await _resourceService.FindIdentityResourcesByScopeAsync(scopeNames);
+            IEnumerable<LJ.Ids4.Core.Domain.Resources.IdentityResource> entities = await _resourceService.FindIdentityResourcesByScopeAsync(scopeNames);
 
             List<IdentityResource> results = new List<IdentityResource>();
             foreach (var entity in entities)
@@ -98,8 +98,8 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
         public async Task<Resources> GetAllResourcesAsync()
         {
-            IEnumerable<Core.Entity.ApiResource> apiResourceEntities = await _resourceService.GetAllApiResourceAsync();
-            IEnumerable<Core.Entity.IdentityResource> identityResourceEntities = await _resourceService.GetAllIdentityResourceAsync();
+            IEnumerable<LJ.Ids4.Core.Domain.Resources.ApiResource> apiResourceEntities = await _resourceService.GetAllApiResourceAsync();
+            IEnumerable<LJ.Ids4.Core.Domain.Resources.IdentityResource> identityResourceEntities = await _resourceService.GetAllIdentityResourceAsync();
 
             List<ApiResource> apiResourceResults = new List<ApiResource>();
 

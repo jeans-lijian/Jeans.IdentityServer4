@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jeans.IdentityServer4.UI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A91AB10E-D79F-4A98-AC67-00044D606AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJ.Ids4.Core", "LJ.Ids4.Core\LJ.Ids4.Core.csproj", "{A9D489B9-5DFF-48FB-AF20-DD6234160219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LJ.Ids4.Core", "LJ.Ids4.Core\LJ.Ids4.Core.csproj", "{A9D489B9-5DFF-48FB-AF20-DD6234160219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJ.Ids4.Data", "LJ.Ids4.Data\LJ.Ids4.Data.csproj", "{B4005D14-7F5A-4570-B155-B85DF99E172C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LJ.Ids4.Data", "LJ.Ids4.Data\LJ.Ids4.Data.csproj", "{B4005D14-7F5A-4570-B155-B85DF99E172C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJ.Ids4.Service", "LJ.Ids4.Service\LJ.Ids4.Service.csproj", "{3733B545-6B42-4BE6-A91A-10DAA85FA433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{B4005D14-7F5A-4570-B155-B85DF99E172C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4005D14-7F5A-4570-B155-B85DF99E172C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4005D14-7F5A-4570-B155-B85DF99E172C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3733B545-6B42-4BE6-A91A-10DAA85FA433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3733B545-6B42-4BE6-A91A-10DAA85FA433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3733B545-6B42-4BE6-A91A-10DAA85FA433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3733B545-6B42-4BE6-A91A-10DAA85FA433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A9D489B9-5DFF-48FB-AF20-DD6234160219} = {A91AB10E-D79F-4A98-AC67-00044D606AB1}
 		{B4005D14-7F5A-4570-B155-B85DF99E172C} = {A91AB10E-D79F-4A98-AC67-00044D606AB1}
+		{3733B545-6B42-4BE6-A91A-10DAA85FA433} = {A91AB10E-D79F-4A98-AC67-00044D606AB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C158406-3038-47B6-98E5-896231C8C598}

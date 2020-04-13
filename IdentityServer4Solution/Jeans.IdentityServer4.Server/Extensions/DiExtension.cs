@@ -1,5 +1,6 @@
-﻿using Jeans.IdentityServer4.Server.Data;
-using Jeans.IdentityServer4.Server.Service;
+﻿using LJ.Ids4.Data;
+using LJ.Ids4.Service.Clients;
+using LJ.Ids4.Service.Resources;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jeans.IdentityServer4.Server.Extensions
@@ -8,14 +9,11 @@ namespace Jeans.IdentityServer4.Server.Extensions
     {
         public static IServiceCollection AddDefaultDi(this IServiceCollection services)
         {
-            services.AddScoped<IDbContext, IdentityServerDbContext>();
-            //services.AddScoped<IObjectDbContext, ObjectDbContext>();
+            services.AddScoped<IDbContext, Ids4DbContext>();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            //services.AddScoped(typeof(IObjectRepository<>), typeof(ObjectEfRepository<>));
 
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IResourceService, ResourceService>();
-            services.AddTransient<IUserEntityService, UserEntityService>();
 
             return services;
         }

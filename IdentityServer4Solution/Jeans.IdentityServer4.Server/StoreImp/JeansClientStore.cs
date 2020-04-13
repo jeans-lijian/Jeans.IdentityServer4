@@ -1,6 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Stores;
-using Jeans.IdentityServer4.Server.Service;
+using LJ.Ids4.Service.Clients;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Jeans.IdentityServer4.Server.StoreImp
 
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
-            Core.Entity.Client entity = await _clientService.FindClientByIdAsync(clientId);
+            var entity = await _clientService.FindClientByIdAsync(clientId);
             if (entity == null)
             {
                 return new Client();
