@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LJ.Ids4.Data
 {
-    public interface IRepository<TEntity> where TEntity : BaseEntity
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }

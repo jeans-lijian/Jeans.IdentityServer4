@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace LJ.Ids4.Data
 {
-    public class Ids4DbContext : DbContext, IDbContext
+    public class Ids4DbContext : DbContext, IIds4DbContext
     {
         public Ids4DbContext(DbContextOptions<Ids4DbContext> options) : base(options)
         {
@@ -50,7 +50,7 @@ namespace LJ.Ids4.Data
         public DbSet<IdentityResourceProperty> IdentityResourceProperties { get; set; }
         public DbSet<IdentityClaim> IdentityClaims { get; set; }
 
-        public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
+        public new DbSet<TEntity> Set<TEntity>() where TEntity : class
         {
             return base.Set<TEntity>();
         }

@@ -7,9 +7,9 @@ namespace LJ.Ids4.Service.Clients
 {
     public class ClientService : IClientService
     {
-        private readonly IRepository<Client> _clientRepository;
+        private readonly IIds4Repository<Client> _clientRepository;
 
-        public ClientService(IRepository<Client> clientRepository)
+        public ClientService(IIds4Repository<Client> clientRepository)
         {
             _clientRepository = clientRepository;
         }

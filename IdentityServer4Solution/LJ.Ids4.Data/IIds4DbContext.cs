@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace LJ.Ids4.Data
 {
-    public interface IDbContext
+    public interface IIds4DbContext
     {
-        DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity;
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Jeans.IdentityServer4.Server.Configuration;
+using Jeans.IdentityServer4.Server.Core.Extensions;
 using Jeans.IdentityServer4.Server.Core.IdsStore;
-using Jeans.IdentityServer4.Server.Extensions;
 using LJ.Ids4.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +25,7 @@ namespace Jeans.IdentityServer4.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Ids4DbContext>(options => options.UseMySql(Configuration.GetConnectionString("Ids4Conn")));
+            services.AddDbContext<AppDbContext>(options => options.UseMySql(Configuration.GetConnectionString("AppConn")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {

@@ -10,12 +10,12 @@ namespace LJ.Ids4.Service.Resources
 {
     public class ResourceService : IResourceService
     {
-        private readonly IRepository<ApiResource> _apiResourceRepository;
-        private readonly IRepository<IdentityResource> _identityResourceRepository;
+        private readonly IIds4Repository<ApiResource> _apiResourceRepository;
+        private readonly IIds4Repository<IdentityResource> _identityResourceRepository;
 
         public ResourceService(
-            IRepository<ApiResource> apiResourceRepository,
-            IRepository<IdentityResource> identityResourceRepository)
+            IIds4Repository<ApiResource> apiResourceRepository,
+            IIds4Repository<IdentityResource> identityResourceRepository)
         {
             _apiResourceRepository = apiResourceRepository;
             _identityResourceRepository = identityResourceRepository;

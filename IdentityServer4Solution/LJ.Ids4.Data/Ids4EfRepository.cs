@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace LJ.Ids4.Data
 {
-    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Ids4EfRepository<TEntity> : IIds4Repository<TEntity> where TEntity : class
     {
-        private readonly IDbContext _context;
+        private readonly IIds4DbContext _context;
         private DbSet<TEntity> _entities;
 
-        public EfRepository(IDbContext context)
+        public Ids4EfRepository(IIds4DbContext context)
         {
             _context = context;
         }
