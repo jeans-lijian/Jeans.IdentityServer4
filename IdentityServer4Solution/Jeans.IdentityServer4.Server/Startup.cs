@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Jeans.IdentityServer4.Server.Configuration;
+using Jeans.IdentityServer4.Server.Core.IdsStore;
 using Jeans.IdentityServer4.Server.Extensions;
-using Jeans.IdentityServer4.Server.StoreImp;
 using LJ.Ids4.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,8 +35,8 @@ namespace Jeans.IdentityServer4.Server
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
                     .AddTestUsers(MemoryConfig.GetTestUsers())
-                    .AddResourceStore<JeansResourceStore>()
-                    .AddClientStore<JeansClientStore>();
+                    .AddResourceStore<CustomResourceStore>()
+                    .AddClientStore<CustomClientStore>();
 
             /*
                     .AddResourceOwnerValidator<JeansResourceOwnerValidator>()

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Jeans.IdentityServer4.Server.StoreImp
+namespace Jeans.IdentityServer4.Server.Core.IdsStore
 {
-    public class JeansClientStore : IClientStore
+    public class CustomClientStore : IClientStore
     {
         private readonly IClientService _clientService;
 
-        public JeansClientStore(IClientService clientService)
+        public CustomClientStore(IClientService clientService)
         {
             _clientService = clientService;
         }

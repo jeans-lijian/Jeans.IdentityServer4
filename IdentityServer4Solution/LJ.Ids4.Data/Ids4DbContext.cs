@@ -18,10 +18,7 @@ namespace LJ.Ids4.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(type => !string.IsNullOrWhiteSpace(type.Namespace))
-                .Where(type => type.BaseType != null &&
-                   type.BaseType.IsGenericType &&
-                   type.BaseType.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>));
+                .Where(type => type.GetInterfaces().Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
             foreach (var item in typesToRegister)
             {
                 dynamic dynamic = Activator.CreateInstance(item);

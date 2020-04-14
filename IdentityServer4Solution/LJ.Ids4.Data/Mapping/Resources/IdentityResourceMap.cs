@@ -23,33 +23,40 @@ namespace LJ.Ids4.Data.Mapping.Resources
             builder.HasData(
                 new IdentityResource
                 {
+                    Id = 1,
                     Name = "openid",
                     DisplayName = "OpenId"
                 },
                 new IdentityResource
                 {
+                    Id = 2,
                     Name = "profile",
                     DisplayName = "Profile"
                 },
                 new IdentityResource
                 {
+                    Id = 3,
                     Name = "email",
                     DisplayName = "Email"
                 },
                 new IdentityResource
                 {
+                    Id = 4,
                     Name = "address",
                     DisplayName = "Address"
                 },
                 new IdentityResource
                 {
+                    Id = 5,
                     Name = "phone",
                     DisplayName = "Phone"
                 },
                 new IdentityResource
                 {
+                    Id = 6,
                     Name = "offline_access",
-                    DisplayName = "OfflineAccess"
+                    DisplayName = "OfflineAccess",
+                    Enabled = false
                 });
         }
     }

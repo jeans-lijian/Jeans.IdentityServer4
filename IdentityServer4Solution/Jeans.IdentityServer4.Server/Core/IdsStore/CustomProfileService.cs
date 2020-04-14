@@ -6,9 +6,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Jeans.IdentityServer4.Server.StoreImp
+namespace Jeans.IdentityServer4.Server.Core.IdsStore
 {
-    public class JeansProfileService : IProfileService
+    public class CustomProfileService : IProfileService
     {
         //private readonly IUserEntityService _userEntityService;
 

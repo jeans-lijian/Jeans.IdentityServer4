@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jeans.IdentityServer4.Server.StoreImp
+namespace Jeans.IdentityServer4.Server.Core.IdsStore
 {
-    public class JeansResourceStore : IResourceStore
+    public class CustomResourceStore : IResourceStore
     {
         private readonly IResourceService _resourceService;
 
-        public JeansResourceStore(IResourceService resourceService)
+        public CustomResourceStore(IResourceService resourceService)
         {
             _resourceService = resourceService;
         }
