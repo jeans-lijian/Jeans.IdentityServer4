@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Jeans.IdentityServer4.Server.Configuration
 {
@@ -64,7 +65,10 @@ namespace Jeans.IdentityServer4.Server.Configuration
                     SubjectId="1",
                     Username="Jeans",
                     Password="123456",
-                    IsActive=true
+                    IsActive=true,
+                    Claims=new List<Claim>{
+                        new Claim("role","test")
+                    }
                 }
             };
         }

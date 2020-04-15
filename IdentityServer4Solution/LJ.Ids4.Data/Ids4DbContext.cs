@@ -1,7 +1,5 @@
-﻿using LJ.Ids4.Core;
-using LJ.Ids4.Core.Domain.Clients;
+﻿using LJ.Ids4.Core.Domain.Clients;
 using LJ.Ids4.Core.Domain.Resources;
-using LJ.Ids4.Data.Mapping.Clients;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

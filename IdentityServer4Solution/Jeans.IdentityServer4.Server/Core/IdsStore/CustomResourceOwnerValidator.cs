@@ -1,41 +1,40 @@
 ﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
+using LJ.Ids4.Core.Domain.Accounts;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jeans.IdentityServer4.Server.Core.IdsStore
 {
     public class CustomResourceOwnerValidator : IResourceOwnerPasswordValidator
     {
-        //private readonly IUserEntityService _userEntityService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        //public JeansResourceOwnerValidator(IUserEntityService userEntityService)
-        //{
-        //    _userEntityService = userEntityService;
-        //}
-
-        //public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
-        //{
-        //    Core.Entity.UserEntity entity = await _userEntityService.ValidateAsync(context.UserName, context.Password);
-        //    if (entity != null)
-        //    {
-        //        context.Result = new GrantValidationResult(
-        //            subject: entity.UserName,
-        //            authenticationMethod: OidcConstants.AuthenticationMethods.Password,
-        //            claims: entity.UserEntityClaims.Select(s => new Claim(s.Type, s.Value)).ToList());
-        //    }
-        //    else
-        //    {
-        //        context.Result = new GrantValidationResult(
-        //            TokenRequestErrors.InvalidGrant,
-        //            "invalid username or password!");
-        //    }
-        //}
-        public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+        public CustomResourceOwnerValidator(UserManager<ApplicationUser> userManager)
         {
-            throw new System.NotImplementedException();
+            _userManager = userManager;
+        }
+
+        public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+        {
+            var entity = await _userManager.FindByNameAsync(context.UserName);
+            if (entity != null)
+            {
+                var userClaims = await _userManager.GetClaimsAsync(entity);
+
+                context.Result = new GrantValidationResult(
+                    subject: entity.UserName,
+                    authenticationMethod: OidcConstants.AuthenticationMethods.Password,
+                    claims: userClaims.ToList());
+            }
+            else
+            {
+                context.Result = new GrantValidationResult(
+                    TokenRequestErrors.InvalidGrant,
+                    "invalid username or password!");
+            }
         }
     }
 }

@@ -35,14 +35,11 @@ namespace Jeans.IdentityServer4.Server
 
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
-                    .AddTestUsers(MemoryConfig.GetTestUsers())
+                    //.AddTestUsers(MemoryConfig.GetTestUsers())
                     .AddResourceStore<CustomResourceStore>()
-                    .AddClientStore<CustomClientStore>();
-
-            /*
-                    .AddResourceOwnerValidator<JeansResourceOwnerValidator>()
-                    .AddProfileService<JeansProfileService>();
-                    */
+                    .AddClientStore<CustomClientStore>()
+                    .AddResourceOwnerValidator<CustomResourceOwnerValidator>()
+                    .AddProfileService<CustomProfileService>();
 
             services.AddDefaultDi();
             services.AddAutoMapper(typeof(Startup));
